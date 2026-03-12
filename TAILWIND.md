@@ -7,12 +7,16 @@
 Install the preset and reference it in your Tailwind config. All brand tokens, dark mode, and component classes (`.btn-primary`, `.btn-secondary`, `.btn-ghost`, `.btn-danger`, `.card`, `.input-field`, `.badge`) are included automatically.
 
 ```bash
-# From a sibling folder (monorepo / local dev)
-npm install ../vuleng-design-system
+npm install github:vuleng/vuleng-design-system#v1.0.0
 ```
+
+**ESM project (Vite, etc.):**
 
 ```js
 // tailwind.config.js
+import { createRequire } from 'module'
+const require = createRequire(import.meta.url)
+
 export default {
   presets: [require('@vuleng/tailwind-preset')],
   content: [
@@ -20,6 +24,16 @@ export default {
     // add your project-specific paths
   ],
   // Only extend if your app needs tokens beyond the preset
+}
+```
+
+**CJS project:**
+
+```js
+// tailwind.config.js
+module.exports = {
+  presets: [require('@vuleng/tailwind-preset')],
+  content: ['./src/**/*.{vue,js,ts,jsx,tsx,astro,html}'],
 }
 ```
 
@@ -127,8 +141,6 @@ These are provided by the preset plugin. Do NOT redefine them in your project CS
 | `.badge` | Small pill-shaped status indicator |
 
 See [COMPONENTS.md](COMPONENTS.md) for full usage examples.
-}
-```
 
 ## Custom Scrollbar
 

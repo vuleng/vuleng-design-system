@@ -9,16 +9,27 @@ Includes brand tokens (colors, fonts, dark mode surfaces), and component classes
 ## Quick Start
 
 ```bash
-# Install from local path (monorepo)
-npm install ../vuleng-design-system
-
-# Or from a git URL
-npm install git+https://github.com/vuleng/vuleng-design-system.git
+npm install github:vuleng/vuleng-design-system#v1.0.0
 ```
+
+**ESM project (Vite, etc.):**
 
 ```js
 // tailwind.config.js
+import { createRequire } from 'module'
+const require = createRequire(import.meta.url)
+
 export default {
+  presets: [require('@vuleng/tailwind-preset')],
+  content: ['./src/**/*.{vue,js,ts,jsx,tsx,astro,html}'],
+}
+```
+
+**CJS project:**
+
+```js
+// tailwind.config.js
+module.exports = {
   presets: [require('@vuleng/tailwind-preset')],
   content: ['./src/**/*.{vue,js,ts,jsx,tsx,astro,html}'],
 }
@@ -62,6 +73,6 @@ Done — all brand tokens and component classes are available.
 When the preset is updated:
 
 1. Bump the version in `package.json`
-2. Commit and push
-3. In each consuming app: `npm update @vuleng/tailwind-preset`
+2. Tag the release: `git tag v1.x.x && git push --tags`
+3. In each consuming app: update the tag in `package.json` and run `npm install`
 4. Rebuild — done
