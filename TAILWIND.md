@@ -1,17 +1,45 @@
 # Tailwind Configuration
 
-> The shared Tailwind CSS setup for all Vulkan Engineering projects. Copy, paste, build.
+> Shared Tailwind CSS setup for all Vulkan Engineering projects, delivered as a **preset**.
 
-## Recommended Tailwind Config
+## Using the Preset (recommended)
 
-This is the canonical config. All projects should use these exact token names and values to ensure cross-project consistency.
+Install the preset and reference it in your Tailwind config. All brand tokens, dark mode, and component classes (`.btn-primary`, `.btn-secondary`, `.btn-ghost`, `.btn-danger`, `.card`, `.input-field`, `.badge`) are included automatically.
+
+```bash
+# From a sibling folder (monorepo / local dev)
+npm install ../vuleng-design-system
+```
+
+```js
+// tailwind.config.js
+export default {
+  presets: [require('@vuleng/tailwind-preset')],
+  content: [
+    './src/**/*.{vue,js,ts,jsx,tsx,astro,html}',
+    // add your project-specific paths
+  ],
+  // Only extend if your app needs tokens beyond the preset
+}
+```
+
+That's it. You get all the colors, fonts, dark mode, and component classes from the preset. Your project CSS only needs:
+
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+## Manual Config (fallback)
+
+If you can't use the preset as a dependency, copy the canonical config below:
 
 ```js
 // tailwind.config.js (or .ts)
 export default {
   darkMode: 'class',
   content: [
-    // Adjust to your project's structure
     './src/**/*.{vue,js,ts,jsx,tsx,astro,html}',
     './components/**/*.{vue,ts}',
     './pages/**/*.vue',
@@ -20,50 +48,28 @@ export default {
   theme: {
     extend: {
       colors: {
-        // ── Brand ──
         vulkan: {
-          orange:         '#FF8935',   // Primary accent
-          'orange-hover': '#F06400',   // Hover state
-          navy:           '#183653',   // Headings, emphasis
-          bg:             '#F5F9FF',   // Light mode background
+          orange:         '#FF8935',
+          'orange-hover': '#F06400',
+          navy:           '#183653',
+          bg:             '#F5F9FF',
         },
-
-        // ── Dark mode surfaces ──
         dark: {
-          bg:      '#0f172a',          // Page background
-          surface: '#1e293b',          // Header, sidebar, cards
-          card:    '#283548',          // Elevated elements
+          bg:      '#0f172a',
+          surface: '#1e293b',
+          card:    '#283548',
         },
-
-        // ── Extended scales (optional, for detailed UI) ──
         orange: {
-          50:  '#fff8f0',
-          100: '#ffedd9',
-          200: '#ffd9b3',
-          300: '#FFB885',
-          400: '#FF8935',              // = vulkan.orange
-          500: '#F06400',              // = vulkan.orange-hover
-          600: '#cc5500',
-          700: '#a34400',
-          800: '#7a3300',
-          900: '#522200',
-          950: '#331500',
+          50:  '#fff8f0', 100: '#ffedd9', 200: '#ffd9b3', 300: '#FFB885',
+          400: '#FF8935', 500: '#F06400', 600: '#cc5500', 700: '#a34400',
+          800: '#7a3300', 900: '#522200', 950: '#331500',
         },
         navy: {
-          50:  '#F5F9FF',              // = vulkan.bg
-          100: '#e0eaf4',
-          200: '#b8cce0',
-          300: '#8faec9',
-          400: '#5c83a8',
-          500: '#3a6389',
-          600: '#2a4d6d',
-          700: '#183653',              // = vulkan.navy
-          800: '#122a42',
-          900: '#0d1f31',
-          950: '#081420',
+          50:  '#F5F9FF', 100: '#e0eaf4', 200: '#b8cce0', 300: '#8faec9',
+          400: '#5c83a8', 500: '#3a6389', 600: '#2a4d6d', 700: '#183653',
+          800: '#122a42', 900: '#0d1f31', 950: '#081420',
         },
       },
-
       fontFamily: {
         sans: ['Lato', 'system-ui', '-apple-system', 'sans-serif'],
       },
@@ -73,9 +79,7 @@ export default {
 }
 ```
 
-### Notes on Token Naming
-
-The projects currently use slightly different structures. This config unifies them:
+### Token Naming
 
 | Token | Usage | Alternative keys seen in projects |
 |-------|-------|----------------------------------|
@@ -84,11 +88,11 @@ The projects currently use slightly different structures. This config unifies th
 | `vulkan.bg` | `bg-vulkan-bg` | `vulkan-bg` |
 | `dark.surface` | `dark:bg-dark-surface` | `dark-surface` |
 
-Both flat (`vulkan-orange`) and nested (`vulkan.orange`) structures produce the same Tailwind classes. Choose nested for readability.
+Both flat (`vulkan-orange`) and nested (`vulkan.orange`) produce the same Tailwind classes. The preset uses nested.
 
 ## CSS Custom Properties
 
-Add these to your main CSS file for use in global styles and plain CSS:
+Optional — add to your main CSS if you need values outside Tailwind (e.g., third-party theming):
 
 ```css
 :root {
@@ -108,96 +112,21 @@ Add these to your main CSS file for use in global styles and plain CSS:
 }
 ```
 
-These are useful for:
-- Global style rules (headings, body)
-- CSS-in-JS or scoped styles that can't use Tailwind directly
-- Third-party component theming
+## Component Classes Reference
 
-## Global Base Styles
+These are provided by the preset plugin. Do NOT redefine them in your project CSS.
 
-Add to your main CSS file (e.g., `style.css`, `main.css`, `global.css`):
+| Class | Description |
+|-------|-------------|
+| `.btn-primary` | Orange soft-glass CTA button |
+| `.btn-secondary` | White/surface outlined button |
+| `.btn-ghost` | Text-only, transparent background |
+| `.btn-danger` | Red soft-glass destructive button |
+| `.card` | White/dark-surface container with border and rounded corners |
+| `.input-field` | Full-width form input with focus ring |
+| `.badge` | Small pill-shaped status indicator |
 
-```css
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@layer base {
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-
-  html {
-    -webkit-text-size-adjust: 100%;
-  }
-
-  body {
-    font-family: 'Lato', system-ui, sans-serif;
-    color: var(--color-text);
-    background-color: var(--color-bg);
-  }
-
-  h1, h2, h3, h4, h5, h6 {
-    color: var(--color-header);
-    font-weight: 700;
-  }
-
-  .dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6 {
-    color: #e2e8f0;
-  }
-
-  [v-cloak] {
-    display: none;
-  }
-}
-```
-
-## Global Component Classes
-
-These go in `@layer components` — shared across all projects:
-
-```css
-@layer components {
-  /* ── Buttons ── */
-  .btn-primary {
-    @apply bg-vulkan-orange text-white font-bold px-6 py-3 rounded-lg
-           hover:bg-vulkan-orange-hover hover:-translate-y-px active:translate-y-0
-           disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed disabled:hover:translate-y-0
-           dark:disabled:bg-gray-700 dark:disabled:text-gray-500
-           transition-all shadow-[0_4px_6px_-1px_rgba(255,137,53,0.2)]
-           hover:shadow-[0_6px_8px_-1px_rgba(255,137,53,0.3)];
-  }
-
-  .btn-secondary {
-    @apply bg-white dark:bg-dark-surface text-vulkan-navy dark:text-gray-200
-           border border-gray-200 dark:border-gray-600 font-semibold px-4 py-2 rounded-lg
-           hover:border-vulkan-navy dark:hover:border-gray-400
-           disabled:opacity-50 disabled:cursor-not-allowed
-           transition-all;
-  }
-
-  /* ── Cards ── */
-  .card {
-    @apply bg-white dark:bg-dark-surface
-           border border-gray-200 dark:border-gray-700
-           rounded-xl shadow-sm;
-  }
-
-  /* ── Form inputs ── */
-  .input-field {
-    @apply w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg
-           bg-white dark:bg-dark-card text-gray-900 dark:text-gray-100
-           placeholder-gray-400 dark:placeholder-gray-500
-           focus:ring-2 focus:ring-vulkan-orange focus:border-transparent
-           transition-colors;
-  }
-
-  /* ── Badges ── */
-  .badge {
-    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold;
-  }
+See [COMPONENTS.md](COMPONENTS.md) for full usage examples.
 }
 ```
 

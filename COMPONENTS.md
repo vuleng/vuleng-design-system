@@ -4,29 +4,34 @@
 
 ## Buttons
 
-Two standard button styles. Use the global `.btn-primary` and `.btn-secondary` classes defined in [TAILWIND.md](TAILWIND.md).
+Four button styles with a **soft glass** aesthetic — semi-transparent backgrounds, `backdrop-blur`, thin light borders, and smooth opacity transitions. No `translateY` bounce.
+
+All classes are provided by the `@vuleng/tailwind-preset`. Use them directly — no extra Tailwind needed.
 
 ### Primary Button
 
-The main call-to-action. Orange background, white text, bold.
+The main call-to-action. Orange with glass effect.
 
 ```html
-<button class="btn-primary">Save Changes</button>
+<button class="btn-primary">
+  <svg class="w-5 h-5" ...><!-- icon --></svg>
+  Save Changes
+</button>
 <button class="btn-primary" disabled>Processing...</button>
 ```
 
 | State | Visual |
 |-------|--------|
-| Default | `bg-vulkan-orange`, white text, subtle shadow |
-| Hover | `bg-vulkan-orange-hover`, `scale` or `translateY(-1px)` |
-| Active | `scale-95` snap |
-| Disabled | Gray background, muted text, `cursor-not-allowed` |
+| Default | Semi-transparent orange, `backdrop-blur`, thin white border, soft shadow |
+| Hover | Deeper orange, slightly elevated shadow |
+| Active | Slight opacity reduction |
+| Disabled | Slate gray, no blur, muted text |
 
 **When to use:** Submit, save, confirm, primary navigation CTA.
 
 ### Secondary Button
 
-Supporting action. White/dark-surface background, navy text, border.
+Supporting action. Glass-white surface with a subtle border.
 
 ```html
 <button class="btn-secondary">Cancel</button>
@@ -34,19 +39,59 @@ Supporting action. White/dark-surface background, navy text, border.
 
 | State | Light | Dark |
 |-------|-------|------|
-| Default | White bg, gray border | `dark-surface` bg, gray-600 border |
-| Hover | Border darkens | Border lightens |
+| Default | Semi-transparent white, gray border | Semi-transparent `dark-surface`, muted border |
+| Hover | Near-opaque white, navy border | Slightly brighter, lighter border |
 | Disabled | 50% opacity | 50% opacity |
 
 **When to use:** Cancel, back, secondary actions, filters.
 
+### Ghost Button
+
+Text-only with no background. Subtle fill on hover.
+
+```html
+<button class="btn-ghost">View details</button>
+```
+
+**When to use:** Tertiary actions, links that look like buttons, toolbar items.
+
+### Danger Button
+
+Red-tinted glass for destructive actions.
+
+```html
+<button class="btn-danger">
+  <svg class="w-5 h-5" ...><!-- trash icon --></svg>
+  Delete
+</button>
+```
+
+**When to use:** Delete, remove, reset — any irreversible or destructive action.
+
 ### Button Sizing
+
+Override the default padding as needed:
 
 | Size | Classes | Context |
 |------|---------|---------|
 | Small | `px-3 py-1.5 text-sm` | Inline actions, table rows |
-| Default | `px-4 py-2` (secondary) / `px-6 py-3` (primary) | Standard usage |
+| Default | Built into each class | Standard usage |
 | Full-width | Add `w-full` | Mobile CTAs, form submit |
+
+### Button with Icon
+
+Always pair an SVG icon with text. Icon on the left, `w-5 h-5`, inherits `currentColor`.
+
+```html
+<button class="btn-primary">
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+       stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+    <path stroke-linecap="round" stroke-linejoin="round"
+          d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
+  </svg>
+  Download
+</button>
+```
 
 ---
 
@@ -181,12 +226,12 @@ Fixed-position notification with type-based styling.
 
 ### Toast Types
 
-| Type | Border | Background (Light) | Background (Dark) | Icon |
-|------|--------|--------------------|--------------------|------|
-| Success | `border-green-500` | `bg-green-50` | `bg-green-900/30` | ✓ |
-| Error | `border-red-500` | `bg-red-50` | `bg-red-900/30` | ✕ |
-| Warning | `border-yellow-500` | `bg-yellow-50` | `bg-yellow-900/30` | ⚠ |
-| Info | `border-blue-500` | `bg-blue-50` | `bg-blue-900/30` | ℹ |
+| Type | Border | Background (Light) | Background (Dark) | Icon (SVG) |
+|------|--------|--------------------|--------------------|------------|
+| Success | `border-green-500` | `bg-green-50` | `bg-green-900/30` | `check-circle` |
+| Error | `border-red-500` | `bg-red-50` | `bg-red-900/30` | `x-circle` |
+| Warning | `border-yellow-500` | `bg-yellow-50` | `bg-yellow-900/30` | `exclamation-triangle` |
+| Info | `border-blue-500` | `bg-blue-50` | `bg-blue-900/30` | `information-circle` |
 
 **Position:** `fixed top-4 right-4 z-50`. Stack multiple toasts vertically with `gap-3`.
 

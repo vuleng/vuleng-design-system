@@ -163,10 +163,37 @@ All headings: `font-weight: 700`, color `vulkan-navy` (light) / `gray-100` (dark
 
 ## Iconography
 
-- Prefer inline SVGs for icons (no icon font dependency).
-- Default icon size: `w-5 h-5` (20×20px) or `w-6 h-6` (24×24px).
-- Icon color: `currentColor` — inherits from parent text color.
-- For emoji-based indicators (toasts, badges), use text emoji rather than images.
+**Library:** [Heroicons](https://heroicons.com) (MIT license, designed for Tailwind). Use the **outline** variant by default; use **solid** for active/selected states.
+
+**Delivery:** Paste the SVG markup inline — no npm dependency needed.
+
+```html
+<!-- Example: chevron-right (outline, 24×24) -->
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+     stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+</svg>
+```
+
+**Rules:**
+- Default size: `w-5 h-5` (20×20) for inline icons, `w-6 h-6` (24×24) for standalone.
+- Color: always `currentColor` — inherits from parent text color.
+- Stroke width: `1.5` (outline variant default).
+- Never use icon fonts (Font Awesome, Material Icons). Inline SVG only.
+- Keep SVGs accessible: add `aria-hidden="true"` for decorative icons, or `role="img"` + `aria-label` for meaningful ones.
+
+## No Emojis in UI
+
+**Emojis are banned from UI chrome** — buttons, headers, labels, nav items, and toasts must use SVG icons instead.
+
+Emojis are acceptable only in user-generated content or data displays where the data itself contains emoji.
+
+| Allowed | Not allowed |
+|---------|-------------|
+| SVG icon in a button | `📥 Download` |
+| SVG icon in a toast | `🎉 Success!` |
+| SVG icon in a nav item | `📄 Documents` |
+| Emoji in a chat message (user content) | Emoji as a section header icon |
 
 ## Do's and Don'ts
 
