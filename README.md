@@ -35,7 +35,7 @@ Done — all brand tokens and component classes are available.
 
 | Feature | Details |
 |---------|---------|
-| Colors | `vulkan-orange`, `vulkan-navy`, `vulkan-bg`, dark mode surfaces, extended orange/navy scales |
+| Colors | `vulkan-orange`, `vulkan-orange-hover`, `vulkan-orange-light`, `vulkan-navy`, `vulkan-bg`, `vulkan-gray`, `vulkan-black`, dark mode surfaces, extended orange/navy scales |
 | Fonts | Lato (sans-serif stack) |
 | Dark mode | Class-based (`darkMode: 'class'`) |
 | Buttons | `.btn-primary`, `.btn-secondary`, `.btn-ghost`, `.btn-danger` (soft glass) |

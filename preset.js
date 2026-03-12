@@ -7,12 +7,21 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        // ── Brand palette (from Profilhåndbok) ──────────────────────────────
         vulkan: {
-          orange: '#FF8935',
-          'orange-hover': '#F06400',
-          navy: '#183653',
-          bg: '#F5F9FF',
+          // Primary orange — logo colour, CTAs
+          orange: '#FF8935',        // Oransje A
+          'orange-hover': '#F06400', // Oransje B  (darker shade for :hover)
+          'orange-light': '#FFB885', // Oransje C  (soft tint)
+          // Primary blue — headers, nav, key surfaces
+          navy: '#183653',           // Marineblå
+          // Background tint — page / panel backgrounds on light mode
+          bg: '#F5F9FF',             // Lyseblå
+          // Text / UI neutrals
+          gray: '#3F3F3F',           // Grå  — sub-headings, secondary text
+          black: '#1D1D1D',          // Svart — body text, high-contrast text
         },
+        // ── Dark mode surfaces (functional, not in brand guide) ─────────────
         dark: {
           bg: '#0f172a',
           surface: '#1e293b',
