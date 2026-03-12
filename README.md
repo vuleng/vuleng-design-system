@@ -4,6 +4,8 @@ Shared design system for Vulkan Engineering — delivered as a **Tailwind CSS pr
 
 Includes brand tokens (colors, fonts, dark mode surfaces), and component classes (`.btn-primary`, `.btn-secondary`, `.btn-ghost`, `.btn-danger`, `.card`, `.input-field`, `.badge`) with a **soft glass** aesthetic.
 
+> Part of the [Vulkan Engineering Company OS](https://github.com/vuleng/vuleng-company-os). For company identity, tone of voice, processes and organisational context, see that repo.
+
 ## Quick Start
 
 ```bash
