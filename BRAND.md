@@ -36,6 +36,8 @@ These three colors define Vulkan Engineering. Every app must use them.
 | **Vulkan Orange Hover** | `#F06400` | Hover/pressed state for orange elements |
 | **Vulkan Navy** | `#183653` | Headings, strong emphasis, brand authority |
 
+**Accessibility note:** The primary button uses a slightly darker orange (`rgba(224, 117, 32, 0.95)`) to achieve WCAG AA contrast ratio (4.5:1) for the `0.9375rem` font size. The brand orange `#FF8935` is still used for accents, focus rings, and decorative elements where AA compliance is met through other means.
+
 ### Extended Orange Scale
 
 For apps needing a broader range (e.g., heatmaps, charts, gradients):
@@ -70,21 +72,25 @@ For apps needing a broader range (e.g., heatmaps, charts, gradients):
 | 900 | `#0d1f31` | |
 | 950 | `#081420` | Deepest navy |
 
-### Neutral Grays
+### Neutral Grays (Navy-Tinted)
+
+All neutrals are tinted with navy to create visual cohesion with the brand palette. Never use Tailwind's default untinted `gray-*` — use the `neutral-*` scale from the preset instead.
 
 | Step | Hex | Role |
 |------|-----|------|
-| 50 | `#f7f7f7` | Subtle backgrounds |
-| 100 | `#efefef` | |
-| 200 | `#dcdcdc` | Borders (light) |
-| 300 | `#bdbdbd` | Input borders |
-| 400 | `#989898` | Placeholder text |
-| 500 | `#6e6e6e` | Secondary text |
-| **600** | **`#3F3F3F`** | **Body text (profil)** |
-| 700 | `#333333` | |
-| **800** | **`#1D1D1D`** | **Svart (profil)** |
-| 900 | `#141414` | |
-| 950 | `#0a0a0a` | |
+| 50 | `#f7f9fb` | Subtle backgrounds |
+| 100 | `#edf1f5` | Skeleton loaders, light fills |
+| 200 | `#dce3eb` | Borders (light mode) |
+| 300 | `#c4ced9` | Input borders |
+| 400 | `#94a3b4` | Placeholder text |
+| 500 | `#6b7d8f` | Secondary text |
+| **600** | **`#4a5e71`** | Body text (secondary emphasis) |
+| **700** | **`#364b5e`** | Strong secondary text |
+| **800** | **`#253a4d`** | High-contrast text |
+| 900 | `#1a2c3d` | Near-black |
+| 950 | `#0f1c2a` | Deepest shade |
+
+**Migration:** Replace all raw Tailwind `gray-*` colors in light mode with the corresponding `neutral-*` values. In dark mode, Tailwind's `gray-*` is acceptable since the dark surfaces already provide navy tinting.
 
 ### Dark Mode Surfaces
 
@@ -143,23 +149,29 @@ fontFamily: {
 
 ### Heading Hierarchy
 
-All headings: `font-weight: 700`, color `vulkan-navy` (light) / `gray-100` (dark).
+All headings: `font-weight: 700`, `letter-spacing: -0.02em`, `line-height: 1.2`, color `vulkan-navy` (light) / `gray-100` (dark).
 
-| Level | Typical Size | Context |
-|-------|-------------|---------|
-| `h1` | `text-2xl` – `text-3xl` | Page titles |
-| `h2` | `text-xl` – `text-2xl` | Section headers |
-| `h3` | `text-lg` | Card titles, panel headers |
-| `h4` | `text-base font-bold` | Sub-sections |
-| Small | `text-sm`, `text-xs` | Labels, metadata, badges |
+| Level | Typical Size | Tracking | Context |
+|-------|-------------|----------|---------|
+| `h1` | `text-2xl` – `text-3xl` | `tracking-heading` | Page titles |
+| `h2` | `text-xl` – `text-2xl` | `tracking-heading` | Section headers |
+| `h3` | `text-lg` | `tracking-heading` | Card titles, panel headers |
+| `h4` | `text-base font-bold` | default | Sub-sections |
+| Small | `text-sm`, `text-xs` | `tracking-wide` (uppercase badges) | Labels, metadata, badges |
 
 ### Body Text
 
+Body text uses `line-height: 1.6` for comfortable reading. Limit text blocks to `max-w-prose` (65ch) for readability.
+
 | Context | Size | Color (Light) | Color (Dark) |
 |---------|------|---------------|--------------|
-| Primary text | `text-base` | `gray-800` (`#3F3F3F`) | `gray-200` (`#e2e8f0`) |
-| Secondary text | `text-sm` | `gray-500` (`#6B7280`) | `gray-400` (`#94a3b8`) |
-| Caption / meta | `text-xs` | `gray-400` | `gray-500` |
+| Primary text | `text-base` | `neutral-800` (`#253a4d`) | `gray-200` (`#e2e8f0`) |
+| Secondary text | `text-sm` | `neutral-500` (`#6b7d8f`) | `gray-400` (`#94a3b8`) |
+| Caption / meta | `text-xs` | `neutral-400` (`#94a3b4`) | `gray-500` |
+
+### Text Wrapping
+
+Use `text-balance` on headings and `text-pretty` on body paragraphs to avoid orphans and improve line breaking. These utilities are provided by the preset.
 
 ## Iconography
 

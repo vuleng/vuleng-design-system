@@ -1,0 +1,219 @@
+# CLAUDE.md — Vulkan Engineering Design System
+
+This file gives AI assistants (Claude, GitHub Copilot, Cursor, etc.) the design rules
+for building Vulkan Engineering applications. Copy this file into the root of any
+Vulkan project alongside the Tailwind preset.
+
+---
+
+## Design System: @vuleng/tailwind-preset
+
+All Vulkan apps use a shared Tailwind CSS preset that provides brand tokens, component
+classes, and a **soft glass** aesthetic with **navy-tinted neutrals**.
+
+Install: `npm install github:vuleng/vuleng-design-system#v1.0.0`
+
+```js
+// tailwind.config.js (ESM)
+import { createRequire } from 'module'
+const require = createRequire(import.meta.url)
+export default {
+  presets: [require('@vuleng/tailwind-preset')],
+  content: ['./src/**/*.{vue,js,ts,jsx,tsx,astro,html}'],
+}
+```
+
+---
+
+## Color Rules
+
+### Brand colors (use Tailwind class names)
+- `vulkan-orange` (#FF8935) — CTAs, focus rings, active states, links
+- `vulkan-orange-hover` (#F06400) — hover/pressed on orange elements
+- `vulkan-navy` (#183653) — headings, authority, emphasis
+- `vulkan-bg` (#F5F9FF) — light mode page background
+
+### Navy-tinted neutrals (MANDATORY in light mode)
+Use `neutral-*` (50–950) for all grays in light mode. NEVER use Tailwind's untinted `gray-*`.
+
+| Light mode | Dark mode | Purpose |
+|-----------|-----------|---------|
+| `text-neutral-800` | `dark:text-gray-200` | Primary text |
+| `text-neutral-500` | `dark:text-gray-400` | Secondary text |
+| `text-neutral-400` | `dark:text-gray-500` | Placeholder, caption |
+| `border-neutral-200` | `dark:border-gray-700` | Layout borders |
+| `border-neutral-300` | `dark:border-gray-600` | Input borders |
+| `text-vulkan-navy` | `dark:text-gray-100` | Headings |
+
+### Dark mode surfaces 
+- `dark-bg` (#0f172a) — page background
+- `dark-surface` (#1e293b) — headers, sidebars, cards
+- `dark-card` (#283548) — elevated cards, inputs
+
+### Rules
+- Orange stays the same in both modes — no `dark:` variants on orange
+- Never use orange as a page background or large surface fill
+- Never use navy for body text
+- Use Tailwind's built-in `green-*`, `red-*`, `yellow-*`, `blue-*` for status colors
+
+---
+
+## Component Classes (from preset — do NOT recreate)
+
+### Buttons (soft glass with hover-lift)
+```
+.btn-primary     — Orange glass, WCAG AA, translateY(-1px) on hover
+.btn-secondary   — White/surface glass
+.btn-ghost       — Text-only, transparent background
+.btn-danger      — Red glass for destructive actions
+.btn-navy        — Navy glass
+.btn-sm          — Smaller size modifier
+.btn-lg          — Larger size modifier
+```
+
+### Cards (glass with elevation hierarchy)
+```
+.card            — Resting elevation: default cards, sections
+.card-raised     — Mid elevation: hovered, selected, floating panels
+.card-floating   — Highest: modals, dropdowns, popovers, toasts
+```
+
+### Form Elements
+```
+.input-field     — Full-width input (navy-tinted border, double-ring focus)
+.select-field    — Styled native select
+.badge           — Status pill
+```
+
+### Skeleton Loaders
+```
+.skeleton          — Base pulsing placeholder
+.skeleton-text     — Single text line
+.skeleton-heading  — Wider heading line
+.skeleton-avatar   — Circular avatar
+```
+
+---
+
+## Typography
+
+**Font:** Lato only (loaded via Google Fonts, resolved by `font-sans`).
+
+| Element | Style |
+|---------|-------|
+| Headings (h1-h6) | `font-bold tracking-heading leading-heading text-vulkan-navy dark:text-gray-100` |
+| Body text | `leading-body` (1.6 line-height) |
+| Text blocks | Limit to `max-w-prose` (65ch) |
+| Headings wrapping | `text-balance` |
+| Paragraphs | `text-pretty` |
+| Badge/label text | `text-xs font-black tracking-wide uppercase` |
+
+### Heading sizes
+```
+h1: text-2xl / text-3xl   — page titles
+h2: text-xl / text-2xl    — section headers
+h3: text-lg               — card titles
+h4: text-base font-bold   — sub-sections
+```
+
+---
+
+## Spacing
+
+| Name | Value | Usage |
+|------|-------|-------|
+| Tight | `gap-1` (4px) | Icon + label |
+| Compact | `gap-2` (8px) | Dense form groups |
+| Default | `gap-3`–`gap-4` (12–16px) | Standard element groups |
+| Section | `gap-6`–`gap-8` (24–32px) | Between page sections |
+| Page | `py-12`–`py-16` (48–64px) | Top/bottom page padding |
+
+---
+
+## Shadow / Elevation
+
+```
+shadow-elevation-1  — resting (cards, sections)
+shadow-elevation-2  — raised (hover, selection)
+shadow-elevation-3  — floating (modals, dropdowns)
+```
+
+---
+
+## Motion
+
+- Micro-interactions: `200ms ease` (buttons, inputs — built into preset)
+- Layout changes: `300ms ease-in-out` (sidebars, modals)
+- Progress: `700ms ease-out`
+- All buttons have `translateY(-1px)` hover-lift (built in, no extra CSS)
+- `prefers-reduced-motion` handled globally by preset
+- Never use `animate-bounce` or spring/elastic easing
+
+---
+
+## Icons
+
+- Library: Heroicons (outline default, solid for active)
+- Delivery: inline SVG only — no icon fonts, no emoji in UI
+- Size: `w-5 h-5` inline, `w-6 h-6` standalone
+- Color: `currentColor` via `stroke="currentColor"`
+- Decorative: `aria-hidden="true"`
+- Standalone: `role="img" aria-label="..."`
+
+---
+
+## Dark Mode
+
+Class-based: `.dark` on `<html>`, stored in `localStorage` key `vulkan_dark_mode`.
+
+Every visual element needs `dark:` variants for backgrounds, text, and borders.
+Pattern for new components:
+```
+bg-white dark:bg-dark-surface
+bg-vulkan-bg dark:bg-dark-bg
+text-neutral-800 dark:text-gray-200
+border-neutral-200 dark:border-gray-700
+```
+
+Always swap logo: `logo.png` (light) ↔ `logo_dark.png` (dark).
+
+---
+
+## Required Patterns
+
+### Empty state
+Icon (Heroicon, muted) + heading + description (`max-w-prose`) + optional CTA button.
+
+### Error / retry
+Red circle icon + heading + description + "Try Again" button (`.btn-secondary`).
+
+### Button loading state
+Spinner SVG (`animate-spin`) + action text ("Saving...") + `disabled` attribute.
+
+### Skeleton loading
+Use `.skeleton` / `.skeleton-text` / `.skeleton-heading` instead of spinners when layout is known.
+
+### Modals
+`role="dialog" aria-modal="true"`, backdrop `bg-black/60 backdrop-blur-sm`, panel uses `.card-floating`.
+
+### Form validation
+`aria-invalid="true" aria-describedby="error-id"`, red border + red error text with `role="alert"`.
+
+---
+
+## Anti-Patterns (NEVER do these)
+
+- ❌ Use Tailwind's default `gray-*` in light mode (use `neutral-*`)
+- ❌ Use orange as a background fill or large surface
+- ❌ Use navy for body text
+- ❌ Use `confirm()` / `alert()` (use modal components)
+- ❌ Hardcode hex color values (use Tailwind tokens)
+- ❌ Use `outline: none` without a focus indicator
+- ❌ Use `animate-bounce` or spring/elastic easing
+- ❌ Nest cards inside cards
+- ❌ Use emoji in UI chrome (buttons, headers, labels, toasts)
+- ❌ Add fonts other than Lato
+- ❌ Use scoped CSS for dark mode overrides (use `dark:` classes)
+- ❌ Use pure black (#000) or pure gray — always navy-tinted
+- ❌ Create custom hex values for status colors (use Tailwind's built-in palettes)
+- ❌ Use icon fonts (Font Awesome, Material Icons)

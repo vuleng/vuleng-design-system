@@ -65,8 +65,11 @@ export default {
         vulkan: {
           orange:         '#FF8935',
           'orange-hover': '#F06400',
+          'orange-light': '#FFB885',
           navy:           '#183653',
           bg:             '#F5F9FF',
+          gray:           '#3F3F3F',
+          black:          '#1D1D1D',
         },
         dark: {
           bg:      '#0f172a',
@@ -83,9 +86,31 @@ export default {
           400: '#5c83a8', 500: '#3a6389', 600: '#2a4d6d', 700: '#183653',
           800: '#122a42', 900: '#0d1f31', 950: '#081420',
         },
+        neutral: {
+          50:  '#f7f9fb', 100: '#edf1f5', 200: '#dce3eb', 300: '#c4ced9',
+          400: '#94a3b4', 500: '#6b7d8f', 600: '#4a5e71', 700: '#364b5e',
+          800: '#253a4d', 900: '#1a2c3d', 950: '#0f1c2a',
+        },
       },
       fontFamily: {
         sans: ['Lato', 'system-ui', '-apple-system', 'sans-serif'],
+      },
+      letterSpacing: {
+        'heading': '-0.02em',
+        'body': '0',
+        'wide': '0.05em',
+      },
+      lineHeight: {
+        'heading': '1.2',
+        'body': '1.6',
+      },
+      maxWidth: {
+        'prose': '65ch',
+      },
+      boxShadow: {
+        'elevation-1': '0 1px 3px 0 rgba(24, 54, 83, 0.06), 0 1px 2px -1px rgba(24, 54, 83, 0.04)',
+        'elevation-2': '0 4px 6px -1px rgba(24, 54, 83, 0.08), 0 2px 4px -2px rgba(24, 54, 83, 0.04)',
+        'elevation-3': '0 10px 15px -3px rgba(24, 54, 83, 0.10), 0 4px 6px -4px rgba(24, 54, 83, 0.05)',
       },
     },
   },

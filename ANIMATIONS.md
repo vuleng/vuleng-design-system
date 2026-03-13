@@ -41,34 +41,26 @@ Use these durations consistently across all projects:
 
 ### Button Hover
 
-The standard Vulkan button hover uses a **lift effect** — the button moves up 1px and the orange shadow deepens:
+All Vulkan buttons (primary, secondary, navy, danger) use a **lift effect** — the button moves up 1px and the shadow deepens. This is built into the preset classes.
 
 ```css
+/* Already in preset.js — no extra CSS needed */
 .btn-primary {
-  transition: all 0.2s;
-  box-shadow: 0 4px 6px -1px rgba(255, 137, 53, 0.2);
+  transition: background-color 150ms ease, opacity 150ms ease,
+              box-shadow 150ms ease, transform 150ms ease;
 }
-
-.btn-primary:hover {
+.btn-primary:hover:not(:disabled) {
   transform: translateY(-1px);
-  box-shadow: 0 6px 8px -1px rgba(255, 137, 53, 0.3);
+  /* shadow deepens automatically */
 }
-.btn-primary:active {
+.btn-primary:active:not(:disabled) {
   transform: translateY(0);
 }
 ```
 
-In Tailwind `@apply`:
+The lift effect is consistent across `.btn-primary`, `.btn-secondary`, `.btn-danger`, and `.btn-navy`.
 
-```css
-.btn-primary {
-  @apply hover:-translate-y-px active:translate-y-0
-         shadow-[0_4px_6px_-1px_rgba(255,137,53,0.2)]
-         hover:shadow-[0_6px_8px_-1px_rgba(255,137,53,0.3)];
-}
-```
-
-Use the lift effect consistently across all projects.
+**Note:** `.btn-ghost` does not lift — it only fills with a subtle background.
 
 ### Card Hover
 
@@ -139,17 +131,18 @@ Simple 180° rotation at `200ms`.
 
 ### Focus Ring
 
-```css
-.input-field {
-  transition: all 0.2s;
-}
+Inputs and selects use a **double-ring glow** for focus — an inner solid ring and an outer diffused ring, both in brand orange:
 
+```css
+/* Already in preset.js */
 .input-field:focus {
-  box-shadow: 0 0 0 3px rgba(255, 137, 53, 0.2);
+  border-color: transparent;
+  box-shadow: 0 0 0 2px rgba(224, 117, 32, 0.5),
+              0 0 0 4px rgba(224, 117, 32, 0.15);
 }
 ```
 
-Orange glow appears smoothly around focused inputs.
+The transition uses `200ms ease` for a smooth appearance.
 
 ## Tailwind Animation Utilities
 
@@ -168,3 +161,19 @@ Use these built-in Tailwind animations:
 - **Don't use `animate-bounce`** in production UI — it doesn't match the industrial tone.
 - **Don't animate on page load** unless it serves orientation (e.g., staggered list items).
 - **Don't use spring physics or playful easing** — keep it professional and snappy.
+
+## Reduced Motion
+
+The preset includes a global `prefers-reduced-motion` media query that disables all transitions and animations for users who request it. This is applied automatically — no per-component work needed.
+
+For elements where you add custom animations outside the preset, use Tailwind's `motion-reduce:` prefix:
+
+```html
+<div class="transition-all motion-reduce:transition-none">
+```
+
+Or scope your keyframe animation:
+
+```html
+<div class="animate-spin motion-reduce:animate-none">
+```

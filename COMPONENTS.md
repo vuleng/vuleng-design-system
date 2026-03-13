@@ -461,6 +461,193 @@ For data-heavy views:
 
 ---
 
+## Skeleton Loaders
+
+Use skeleton placeholders to indicate loading state instead of spinners when the layout is known. The `.skeleton` classes are provided by the preset.
+
+### Card Skeleton
+
+```html
+<div class="card p-6 space-y-4">
+  <div class="skeleton skeleton-heading"></div>
+  <div class="skeleton skeleton-text w-full"></div>
+  <div class="skeleton skeleton-text w-4/5"></div>
+  <div class="skeleton skeleton-text w-3/5"></div>
+</div>
+```
+
+### List Skeleton
+
+```html
+<div class="space-y-3">
+  <div class="flex items-center gap-3" v-for="i in 4" :key="i">
+    <div class="skeleton skeleton-avatar"></div>
+    <div class="flex-1 space-y-2">
+      <div class="skeleton skeleton-text w-2/3"></div>
+      <div class="skeleton skeleton-text w-1/3"></div>
+    </div>
+  </div>
+</div>
+```
+
+### Table Skeleton
+
+```html
+<div class="card overflow-hidden">
+  <div class="p-4 space-y-3">
+    <div class="skeleton skeleton-text w-1/4"></div>
+    <div class="space-y-2">
+      <div class="skeleton h-10 w-full rounded"></div>
+      <div class="skeleton h-10 w-full rounded"></div>
+      <div class="skeleton h-10 w-full rounded"></div>
+    </div>
+  </div>
+</div>
+```
+
+---
+
+## Empty States
+
+When a list, table, or section has no data, show a structured empty state instead of blank space.
+
+```html
+<div class="flex flex-col items-center justify-center py-16 px-6 text-center">
+  <!-- Icon — use a relevant Heroicon, muted color -->
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+       stroke-width="1" stroke="currentColor"
+       class="w-12 h-12 text-neutral-300 dark:text-neutral-600 mb-4"
+       aria-hidden="true">
+    <path stroke-linecap="round" stroke-linejoin="round"
+          d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+  </svg>
+
+  <h3 class="text-lg font-bold text-vulkan-navy dark:text-gray-100 mb-2">No documents yet</h3>
+  <p class="text-sm text-neutral-500 dark:text-neutral-400 mb-6 max-w-prose">
+    Create your first document to get started. Documents help you track procedures and requirements.
+  </p>
+
+  <button class="btn-primary">
+    <svg class="w-5 h-5" aria-hidden="true"><!-- plus icon --></svg>
+    Create Document
+  </button>
+</div>
+```
+
+| Property | Value |
+|----------|-------|
+| Icon | Heroicon outline, `w-12 h-12`, muted neutral color |
+| Heading | `text-lg font-bold text-vulkan-navy` |
+| Description | `text-sm text-neutral-500`, max-width `max-w-prose` |
+| CTA | Primary button (optional — only when user can create) |
+| Spacing | `py-16` vertical padding |
+
+---
+
+## Error / Retry
+
+When a data fetch or operation fails, show a clear error state with a retry action.
+
+```html
+<div class="flex flex-col items-center justify-center py-12 px-6 text-center">
+  <div class="w-12 h-12 rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center mb-4">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+         stroke-width="1.5" stroke="currentColor"
+         class="w-6 h-6 text-red-600 dark:text-red-400" aria-hidden="true">
+      <path stroke-linecap="round" stroke-linejoin="round"
+            d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+    </svg>
+  </div>
+
+  <h3 class="text-lg font-bold text-vulkan-navy dark:text-gray-100 mb-2">Something went wrong</h3>
+  <p class="text-sm text-neutral-500 dark:text-neutral-400 mb-6 max-w-prose">
+    We couldn't load the data. Check your connection and try again.
+  </p>
+
+  <button class="btn-secondary" @click="retry">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+         stroke-width="1.5" stroke="currentColor" class="w-5 h-5" aria-hidden="true">
+      <path stroke-linecap="round" stroke-linejoin="round"
+            d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182" />
+    </svg>
+    Try Again
+  </button>
+</div>
+```
+
+---
+
+## Button Loading State
+
+When a button triggers an async action, show a spinner and disable interaction.
+
+```html
+<!-- Loading state -->
+<button class="btn-primary" disabled>
+  <svg class="w-4 h-4 animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true">
+    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+  </svg>
+  Saving...
+</button>
+
+<!-- Normal state -->
+<button class="btn-primary">
+  Save Changes
+</button>
+```
+
+**Rules:**
+- Always add `disabled` during loading to prevent double-submission.
+- Replace button text with a loading message (`Saving...`, `Deleting...`, etc.).
+- Use the inline SVG spinner, not `animate-pulse` or a separate component.
+- Keep the button the same width during loading to prevent layout shift.
+
+### Full form submit pattern
+
+```html
+<form @submit.prevent="handleSubmit">
+  <!-- form fields -->
+  <div class="flex gap-3 justify-end mt-6">
+    <button type="button" class="btn-secondary" :disabled="isSubmitting">Cancel</button>
+    <button type="submit" class="btn-primary" :disabled="isSubmitting">
+      <template v-if="isSubmitting">
+        <svg class="w-4 h-4 animate-spin" ...></svg>
+        Saving...
+      </template>
+      <template v-else>
+        Save Changes
+      </template>
+    </button>
+  </div>
+</form>
+```
+
+---
+
+## Elevation Hierarchy
+
+Cards and surfaces use three elevation levels. Use the lowest level that provides sufficient visual separation.
+
+| Level | Class | Shadow | Usage |
+|-------|-------|--------|-------|
+| Resting | `.card` | `elevation-1` | Default cards, list items, form sections |
+| Raised | `.card-raised` | `elevation-2` | Hovered cards, active selections, floating panels |
+| Floating | `.card-floating` | `elevation-3` | Modals, dropdowns, popovers, toasts |
+
+```html
+<!-- Resting -->
+<div class="card p-6">Default card</div>
+
+<!-- Raised (e.g., on hover or selected) -->
+<div class="card-raised p-6">Emphasized card</div>
+
+<!-- Floating (e.g., dropdown panel) -->
+<div class="card-floating p-4">Dropdown content</div>
+```
+
+---
+
 ## Empty States
 
 When a list or section has no data:

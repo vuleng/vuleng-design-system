@@ -139,14 +139,15 @@ If your app defines keyboard shortcuts:
 
 | Combination | Approx. Ratio | Passes |
 |-------------|---------------|--------|
-| `#3F3F3F` on `#F5F9FF` | ~9:1 | AA, AAA |
+| `#253a4d` on `#F5F9FF` (neutral-800 on bg) | ~10:1 | AA, AAA |
 | `#e2e8f0` on `#0f172a` | ~12:1 | AA, AAA |
 | `#183653` on `#F5F9FF` | ~10:1 | AA, AAA |
-| `white` on `#FF8935` | ~3:1 | AA large |
-| `#6B7280` on `white` | ~5:1 | AA |
+| `white` on `rgba(224,117,32,0.95)` (btn-primary) | ~4.5:1 | AA |
+| `white` on `#FF8935` (brand orange) | ~3:1 | AA large only |
+| `#6b7d8f` on `white` (neutral-500) | ~5:1 | AA |
 | `#94a3b8` on `#1e293b` | ~5:1 | AA |
 
-White text on `vulkan-orange` meets AA for large text (bold buttons, headings). For smaller text on orange backgrounds, use navy instead.
+The primary button uses a slightly darkened orange (`rgba(224, 117, 32, 0.95)`) to achieve AA compliance at its `0.9375rem` font size. The brand orange `#FF8935` is reserved for accents, focus rings, and large-text contexts where 3:1 suffices.
 
 ## Images and Icons
 

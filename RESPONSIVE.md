@@ -21,6 +21,43 @@ Use Tailwind's default breakpoints:
 
 **Most apps only need `md:` and `lg:`.** Don't over-breakpoint — if `sm:` changes are minor, skip them.
 
+## Spacing System
+
+Use consistent spacing values throughout all apps. These are guidelines, not components — apply them through Tailwind classes.
+
+### Spacing Scale
+
+| Name | Value | Tailwind | Usage |
+|------|-------|----------|-------|
+| **Tight** | 4px | `gap-1`, `space-y-1` | Between icon and label, related micro-elements |
+| **Compact** | 8px | `gap-2`, `space-y-2` | Between form fields in a dense group |
+| **Default** | 12–16px | `gap-3` to `gap-4` | Between elements in a group (cards in a grid, buttons in a row) |
+| **Section** | 24–32px | `gap-6` to `gap-8`, `py-6` to `py-8` | Between distinct sections on a page |
+| **Page** | 48–64px | `py-12` to `py-16` | Top/bottom page padding, hero spacing |
+
+### When to Use What
+
+| Context | Recommended | Example |
+|---------|-------------|---------|
+| Button group | `gap-3` | `<div class="flex gap-3">` |
+| Form fields | `space-y-4` | Label + input + error stacked |
+| Card grid | `gap-4 md:gap-6` | Dashboard cards |
+| Page sections | `space-y-8` | Content blocks separated by headings |
+| Modal content | `space-y-6` | Title → body → actions |
+| Header internal | `gap-2` to `gap-3` | Logo ↔ title ↔ actions |
+
+### Consistent Padding
+
+| Element | Padding |
+|---------|---------|
+| Card (compact) | `p-4` |
+| Card (standard) | `p-6` |
+| Card (spacious) | `p-8` |
+| Modal panel | `p-6 md:p-8` |
+| Page content | `px-4 md:px-6 lg:px-8` |
+| Table cell | `px-4 py-3` |
+| Toast | `px-6 py-4` |
+
 ## Standard Layouts
 
 ### App Shell (Internal Tools)

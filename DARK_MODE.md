@@ -104,18 +104,18 @@ Provide a toggle in the app's settings or header. Common patterns:
 
 | Role | Light | Dark | Tailwind |
 |------|-------|------|----------|
-| Primary text | `gray-800` | `gray-200` | `text-gray-800 dark:text-gray-200` |
-| Secondary text | `gray-500` | `gray-400` | `text-gray-500 dark:text-gray-400` |
+| Primary text | `neutral-800` | `gray-200` | `text-neutral-800 dark:text-gray-200` |
+| Secondary text | `neutral-500` | `gray-400` | `text-neutral-500 dark:text-gray-400` |
 | Headings | `vulkan-navy` | `gray-100` | `text-vulkan-navy dark:text-gray-100` |
-| Disabled | `gray-400` | `gray-600` | `text-gray-400 dark:text-gray-600` |
+| Disabled | `neutral-400` | `gray-600` | `text-neutral-400 dark:text-gray-600` |
 
 ### Borders
 
 | Context | Light | Dark | Tailwind |
 |---------|-------|------|----------|
-| Layout dividers | `gray-200` | `gray-700` | `border-gray-200 dark:border-gray-700` |
-| Input borders | `gray-300` | `gray-600` | `border-gray-300 dark:border-gray-600` |
-| Button borders | `gray-200` | `gray-600` | `border-gray-200 dark:border-gray-600` |
+| Layout dividers | `neutral-200` | `gray-700` | `border-neutral-200 dark:border-gray-700` |
+| Input borders | `neutral-300` | `gray-600` | `border-neutral-300 dark:border-gray-600` |
+| Button borders | `neutral-200` | `gray-600` | `border-neutral-200 dark:border-gray-600` |
 
 ### Colors That Stay the Same
 
