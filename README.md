@@ -74,6 +74,18 @@ Done — all brand tokens and component classes are available.
 | [ANIMATIONS.md](ANIMATIONS.md) | Motion and transition guidelines |
 | [ACCESSIBILITY.md](ACCESSIBILITY.md) | a11y requirements |
 | [RESPONSIVE.md](RESPONSIVE.md) | Breakpoint and spacing strategy |
+| [DOCUMENTATION.md](DOCUMENTATION.md) | Living documentation standard, CLAUDE.md template, lessons learned |
+
+## Standard Application Requirements
+
+All Vulkan Engineering applications must implement:
+
+1. **Internationalization**: Norwegian (default) + English, using translation keys and `localStorage`
+2. **Dark/Light Mode**: Class-based toggle with `localStorage` persistence
+3. **Living Documentation**: Focused `docs/` directory following [DOCUMENTATION.md](DOCUMENTATION.md)
+4. **Test Discipline**: Tests updated in same commit as code changes
+
+The AI instruction files (`ai/CLAUDE.md`, `ai/copilot-instructions.md`) include framework-specific sections for **Next.js** and **Astro + Sanity** projects. Copy the relevant sections when setting up a new project.
 
 ## AI Instructions (for Copilot, Claude, Cursor)
 

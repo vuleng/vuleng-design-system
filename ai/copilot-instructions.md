@@ -135,3 +135,41 @@ Shadow utilities: `shadow-elevation-1`, `shadow-elevation-2`, `shadow-elevation-
 - Never use emoji in UI chrome (buttons, headers, labels, toasts)
 - Never add fonts other than Lato
 - Never use scoped CSS for dark mode overrides — use Tailwind `dark:` classes
+
+---
+
+## Standard Requirements
+
+- All apps: **Norwegian (nb) + English (en)** — Norwegian default. Translation keys only, never hardcode strings. `localStorage` key: `vulkan_language`.
+- All apps: **Dark + light mode**. `.dark` class on `<html>`, `localStorage`: `vulkan_dark_mode`.
+
+## Code Organization
+
+- Shared components: used by 2+ pages. Single-use: colocate with page.
+- Split action/mutation files by domain — never one god-file.
+- Descriptive filenames — no `utils.ts`, `helpers.ts`, `index.ts`.
+- Remove dead code immediately.
+
+## Next.js Specifics
+
+- Server actions split by domain in `app/actions/`
+- Client components use `*-client.tsx` suffix
+- Server components fetch -> props -> client components render
+
+## Astro + Sanity Specifics
+
+- GROQ queries in dedicated files, not inline
+- `client:visible` over `client:load` where possible
+- Astro i18n routing for `/en/`, `/nb/`
+
+## Documentation
+
+- Docs in `docs/` — only for things code can't express (auth flows, DB schema, route roles)
+- Do NOT duplicate TypeScript types or component props in markdown
+- Update docs + tests in the same commit as code changes
+
+## Testing
+
+- Tests updated in same commit as code
+- Run test suite after all changes
+- Update failing tests — never skip them

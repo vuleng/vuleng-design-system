@@ -217,3 +217,100 @@ Use `.skeleton` / `.skeleton-text` / `.skeleton-heading` instead of spinners whe
 - ❌ Use pure black (#000) or pure gray — always navy-tinted
 - ❌ Create custom hex values for status colors (use Tailwind's built-in palettes)
 - ❌ Use icon fonts (Font Awesome, Material Icons)
+
+---
+
+## Standard Requirements for Vulkan Applications
+
+### Internationalization (i18n)
+All Vulkan applications must support **Norwegian (nb)** and **English (en)** unless
+single-language is explicitly specified. Norwegian is the default language.
+
+- Use a context/provider pattern for locale state
+- Store language preference in `localStorage` key `vulkan_language`
+- All user-facing text must use translation keys — never hardcode strings in UI
+- Prevent FOUC: read locale from `localStorage` before hydration
+- All AI-generated content defaults to Norwegian
+
+### Dark / Light Mode
+All Vulkan applications must support dark and light mode.
+
+- Class-based: `.dark` on `<html>`, stored in `localStorage` key `vulkan_dark_mode`
+- Every visual element needs `dark:` variants (backgrounds, text, borders)
+- Swap logo: `logo.png` (light) / `logo_dark.png` (dark)
+- See DARK_MODE.md in the design system for full implementation guide
+
+---
+
+## Project Documentation
+
+This project has focused documentation in `docs/`. Read ONLY what you need.
+
+### Before starting a task, read:
+
+| If you are working on... | Read... |
+|--------------------------|---------|
+| A page, route, or API endpoint | `docs/routes-and-pages.md` |
+| Database tables, columns, RLS, migrations | `docs/database.md` |
+| Auth, login, signup, roles, middleware | `docs/data-and-auth.md` |
+| Tech stack, file structure, env vars, patterns | `docs/architecture.md` |
+| A component's props or behavior | Read the component file directly |
+| TypeScript types | Read the types file directly |
+| Mutation/action signatures | Read the action file directly |
+| Translation keys | Read the translation files directly |
+
+Adjust this table to match your project's actual docs.
+
+### After completing a task:
+1. Update relevant doc file(s) — ONLY if you changed something the doc describes.
+   Do NOT update docs for component props, types, or translations.
+2. Update, add, or remove tests to match your changes. Run the test suite.
+3. Run `npm run build` (or equivalent) to verify no breakage.
+
+---
+
+## Code Organization
+
+- **Split by concern** — if a file does unrelated things, split it by domain
+- **Shared components**: only in the shared folder if used by 2+ pages.
+  Single-use components live with their page.
+- **Descriptive names**: `user-actions.ts` not `actions.ts`, `grade-converter.ts` not `utils.ts`
+- **No dead code**: remove unused files — grep for imports to verify
+- **No barrel files**: avoid `index.ts` re-exports that obscure contents
+- See DOCUMENTATION.md in the design system for the full standard
+
+---
+
+## Code Organization — Next.js
+
+These apply when the project uses Next.js (App Router):
+
+- **Server actions**: split by domain in `app/actions/` (e.g. `location-actions.ts`, `user-actions.ts`). Shared auth helpers in a separate file.
+- **Client components**: use `*-client.tsx` suffix for explicit `"use client"` files
+- **Data flow**: server components fetch data -> pass as props -> client components render. No client-side data fetching libraries unless explicitly needed.
+- **Cache invalidation**: `revalidatePath()` after mutations in server actions
+- **Route groups**: use `(group)/` folders for layout boundaries (e.g. `(app)/` for protected routes)
+- **File conventions**: `page.tsx`, `layout.tsx`, `loading.tsx`, `error.tsx` follow Next.js standards
+
+---
+
+## Code Organization — Astro + Sanity
+
+These apply when the project uses Astro with Sanity CMS:
+
+- **Pages**: `.astro` files in `src/pages/` — static by default, opt-in to SSR where needed
+- **Content**: Sanity as the single source of truth. GROQ queries in dedicated query files, not scattered across components.
+- **Islands**: use `client:load` only when interactivity is needed. Prefer `client:visible` for below-the-fold interactive components.
+- **Styles**: Tailwind via the preset. Scoped styles in `.astro` files for component-specific overrides.
+- **i18n**: Astro's built-in i18n routing (`/en/`, `/nb/`) with Sanity localized fields
+
+---
+
+## Testing
+
+- Tests are updated in the **same commit** as the code they cover
+- Run the test suite (`npm test` or equivalent) after making changes
+- Add tests for new shared components and utility functions
+- Remove tests for deleted code
+- If a test fails after a UI change: update the test, don't skip it
+- Server-side code that can't be imported in tests: test validation schemas separately
