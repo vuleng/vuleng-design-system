@@ -150,17 +150,37 @@ Shadow utilities: `shadow-elevation-1`, `shadow-elevation-2`, `shadow-elevation-
 - Descriptive filenames — no `utils.ts`, `helpers.ts`, `index.ts`.
 - Remove dead code immediately.
 
-## Next.js Specifics
+## Next.js Specifics (see NEXTJS.md)
 
-- Server actions split by domain in `app/actions/`
-- Client components use `*-client.tsx` suffix
-- Server components fetch -> props -> client components render
+- Server actions split by domain in `app/actions/`, Zod validation, auth helpers, `revalidateTag()` after mutations
+- Server components fetch → props → client components render
+- `"use client"` only for interactivity (forms, toggles, search)
+- No `export const dynamic = "force-dynamic"` — let Next.js auto-detect
+- Auth: `getClaims()` in middleware, `React.cache()` on `getCurrentUserWithProfile()` in layout/page
 
 ## Astro + Sanity Specifics
 
 - GROQ queries in dedicated files, not inline
 - `client:visible` over `client:load` where possible
 - Astro i18n routing for `/en/`, `/nb/`
+
+## Performance (see PERFORMANCE.md)
+
+- Region co-location: Vercel region MUST match Supabase region
+- Auth dedup: `getClaims()` (~0ms) in middleware, `React.cache()` on `getUser()` in components
+- Cache shared data: `unstable_cache` + `revalidateTag` for locations, routes, etc.
+- Query discipline: nested selects, `Promise.all`, no `select("*")` on lists, no N+1 loops
+
+## Supabase Patterns (see SUPABASE.md)
+
+- `createClient()` for user context, `createAdminClient()` for admin ops and cached queries
+- Nested selects: `.select("*, sector:sectors(name)")` — avoid waterfalls
+- `unstable_cache` uses admin client (no cookie dependency)
+
+## Deployment (see DEPLOY.md)
+
+- Vercel for all projects, `vercel.json` with matching regions
+- Preview deployments per PR, production from `main`
 
 ## Documentation
 
@@ -173,3 +193,4 @@ Shadow utilities: `shadow-elevation-1`, `shadow-elevation-2`, `shadow-elevation-
 - Tests updated in same commit as code
 - Run test suite after all changes
 - Update failing tests — never skip them
+- Test Zod schemas separately (server actions can't be imported in test context)

@@ -11,7 +11,7 @@ Uses **navy-tinted neutrals** instead of generic grays for a cohesive, non-templ
 ## Quick Start
 
 ```bash
-npm install github:vuleng/vuleng-design-system#v1.0.0
+npm install github:vuleng/vuleng-design-system#v1.2.0
 ```
 
 **ESM project (Vite, etc.):**
@@ -65,6 +65,7 @@ Done — all brand tokens and component classes are available.
 
 ## Documentation
 
+### Design (UI)
 | File | Content |
 |------|---------|
 | [BRAND.md](BRAND.md) | Colors, typography, logo rules, iconography, no-emoji policy |
@@ -74,6 +75,16 @@ Done — all brand tokens and component classes are available.
 | [ANIMATIONS.md](ANIMATIONS.md) | Motion and transition guidelines |
 | [ACCESSIBILITY.md](ACCESSIBILITY.md) | a11y requirements |
 | [RESPONSIVE.md](RESPONSIVE.md) | Breakpoint and spacing strategy |
+
+### Engineering (Full-Stack)
+| File | Content |
+|------|---------|
+| [STACK-GUIDE.md](STACK-GUIDE.md) | When to use Next.js vs Astro vs static. Decision tree + stack profiles. |
+| [PERFORMANCE.md](PERFORMANCE.md) | Region co-location, auth dedup, caching, query discipline. Measured results. |
+| [NEXTJS.md](NEXTJS.md) | App Router patterns: auth flow, server actions, forms, modals, search, testing. |
+| [SUPABASE.md](SUPABASE.md) | Database queries, auth patterns, RLS, caching with admin client. |
+| [DEPLOY.md](DEPLOY.md) | Vercel setup, region config, environment variables, domain setup. |
+| [PROJECT-TEMPLATE.md](PROJECT-TEMPLATE.md) | CLAUDE.md template, directory structure, docs/ blueprint for new projects. |
 | [DOCUMENTATION.md](DOCUMENTATION.md) | Living documentation standard, CLAUDE.md template, lessons learned |
 
 ## Standard Application Requirements
