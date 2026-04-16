@@ -1,7 +1,7 @@
 {
   "name": "@vuleng/tailwind-preset",
-  "version": "1.1.0",
-  "description": "Shared Tailwind CSS preset for Vulkan Engineering apps — brand tokens, soft glass components, dark mode.",
+  "version": "1.2.0",
+  "description": "Shared design system for Vulkan Engineering — Tailwind preset, full-stack architecture guides, AI instructions.",
   "main": "preset.js",
   "exports": {
     ".": "./preset.js"

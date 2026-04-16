@@ -283,14 +283,15 @@ Adjust this table to match your project's actual docs.
 
 ## Code Organization — Next.js
 
-These apply when the project uses Next.js (App Router):
+These apply when the project uses Next.js (App Router). See **NEXTJS.md** for full details.
 
-- **Server actions**: split by domain in `app/actions/` (e.g. `location-actions.ts`, `user-actions.ts`). Shared auth helpers in a separate file.
-- **Client components**: use `*-client.tsx` suffix for explicit `"use client"` files
-- **Data flow**: server components fetch data -> pass as props -> client components render. No client-side data fetching libraries unless explicitly needed.
-- **Cache invalidation**: `revalidatePath()` after mutations in server actions
-- **Route groups**: use `(group)/` folders for layout boundaries (e.g. `(app)/` for protected routes)
-- **File conventions**: `page.tsx`, `layout.tsx`, `loading.tsx`, `error.tsx` follow Next.js standards
+- **Server actions**: split by domain in `app/actions/` (e.g. `location-actions.ts`, `user-actions.ts`). Shared auth helpers in a separate file. Zod validation first, then auth, then operation, then `revalidateTag()`.
+- **Client components**: use `"use client"` directive only for interactivity (forms, toggles, search).
+- **Data flow**: server components fetch data → pass as props → client components render.
+- **Cache invalidation**: `revalidateTag()` after mutations (not `revalidatePath("/")`).
+- **Route groups**: use `(group)/` folders for layout boundaries (e.g. `(app)/` for protected routes).
+- **No `force-dynamic`**: let Next.js auto-detect. Never add `export const dynamic = "force-dynamic"`.
+- **File conventions**: `page.tsx`, `layout.tsx`, `loading.tsx`, `error.tsx` follow Next.js standards.
 
 ---
 
@@ -314,3 +315,54 @@ These apply when the project uses Astro with Sanity CMS:
 - Remove tests for deleted code
 - If a test fails after a UI change: update the test, don't skip it
 - Server-side code that can't be imported in tests: test validation schemas separately
+
+---
+
+## Tech Stack Selection
+
+See **STACK-GUIDE.md** for the full decision tree.
+
+- **Dynamic webapp** (auth + database): Next.js + Supabase + Vercel
+- **Content website** (CMS): Astro + Sanity + Vercel
+- **Static site**: Astro/HTML + Vercel
+
+---
+
+## Performance (5 Critical Rules)
+
+See **PERFORMANCE.md** for details, code examples, and measured results.
+
+1. **Region co-location** — Vercel region MUST match Supabase region (`vercel.json`). Mismatch = +150ms per DB call.
+2. **Auth deduplication** — `getClaims()` in middleware (~0ms). `React.cache()` on `getUser()` in layout/page (~50ms, runs once).
+3. **Cache shared data** — `unstable_cache` + `revalidateTag` for locations, routes, etc. User data fetches fresh.
+4. **Query discipline** — nested selects, `Promise.all`, specific columns on lists, no N+1 loops.
+5. **No `force-dynamic`** — let Next.js auto-detect dynamic pages.
+
+---
+
+## Supabase Patterns
+
+See **SUPABASE.md** for full auth and query patterns.
+
+- **Two clients**: `createClient()` (user context, RLS) vs `createAdminClient()` (service role, no RLS)
+- **Nested selects**: `.select("*, sector:sectors(name)")` instead of sequential queries
+- **Cache with admin client**: `unstable_cache` callbacks use `createAdminClient()` (no cookie dependency)
+- **Invalidate on mutation**: `revalidateTag("locations")` in server actions
+
+---
+
+## Deployment
+
+See **DEPLOY.md** for setup details.
+
+- **Vercel** for all web projects
+- **`vercel.json`** with `regions` matching database region
+- **Preview deployments** per PR (auto)
+- **Environment variables** in Vercel dashboard (never commit secrets)
+
+---
+
+## Project Bootstrap
+
+See **PROJECT-TEMPLATE.md** for complete directory structure, CLAUDE.md template,
+and file naming conventions for new projects.
