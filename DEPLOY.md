@@ -51,7 +51,7 @@ if you use different Supabase projects per environment.
 
 ### Production
 - Push to `main` → Vercel auto-deploys to production
-- Custom domain (e.g., goksoyra.no) points to production
+- Custom domain (e.g., your-domain.no) points to production
 
 ### Preview
 - Push any branch → Vercel creates a preview deployment
@@ -92,8 +92,8 @@ Before merging to main:
 
 ### Recommended DNS Setup
 ```
-goksoyra.no        → A record → 76.76.21.21
-www.goksoyra.no    → CNAME → cname.vercel-dns.com
+example.no        → A record → 76.76.21.21
+www.example.no    → CNAME → cname.vercel-dns.com
 ```
 
 ---

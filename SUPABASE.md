@@ -277,13 +277,12 @@ Or maintain types manually for more control:
 
 ```ts
 // src/types/database.ts
-export interface Location {
+export interface Project {
   id: string;
   name: string;
-  rock_type: string | null;
-  latitude: number | null;
-  longitude: number | null;
-  // ...
+  description: string | null;
+  owner_id: string;
+  created_at: string;
 }
 ```
 

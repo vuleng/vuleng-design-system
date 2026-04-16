@@ -2,6 +2,24 @@
 
 Playbook for AI agents building Vulkan Engineering applications with Next.js 15+ App Router and Supabase.
 
+## Table of Contents
+
+- [Project Structure](#project-structure)
+- [Server vs Client Components](#server-vs-client-components)
+- [Authentication Flow](#authentication-flow)
+- [Data Fetching](#data-fetching)
+- [Server Actions](#server-actions)
+- [Loading States](#loading-states)
+- [Modals](#modals)
+- [Forms](#forms)
+- [Search (Cmd+K Pattern)](#search-cmdk-pattern)
+- [Testing](#testing)
+- [File Naming Conventions](#file-naming-conventions)
+- [i18n](#i18n)
+- [Error Boundaries](#error-boundaries)
+- [Anti-Patterns](#anti-patterns)
+- [Quick Reference: Supabase Client Selection](#quick-reference-supabase-client-selection)
+
 ---
 
 ## Project Structure

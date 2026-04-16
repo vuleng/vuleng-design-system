@@ -11,7 +11,7 @@ Uses **navy-tinted neutrals** instead of generic grays for a cohesive, non-templ
 ## Quick Start
 
 ```bash
-npm install github:vuleng/vuleng-design-system#v1.0.0
+npm install github:vuleng/vuleng-design-system#v1.2.0
 ```
 
 **ESM project (Vite, etc.):**
