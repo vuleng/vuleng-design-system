@@ -1,6 +1,16 @@
+---
+file: design/motion.md
+audience: [human, ai]
+scope: design
+stability: stable
+last-verified: 2026-04-25
+---
+
 # Animations & Motion
 
-> Timing, easing, and motion conventions for all Vulkan Engineering apps.
+> **What this is:** Timing, easing, and motion conventions across the design system.
+> **When to read it:** Before adding any transition or animation. The preset already handles `prefers-reduced-motion` globally.
+> **What it doesn't cover:** Component-specific hover/active visuals (see `components.md`).
 
 ## Philosophy
 

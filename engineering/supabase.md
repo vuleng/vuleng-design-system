@@ -1,7 +1,19 @@
+---
+file: engineering/supabase.md
+audience: [human, ai]
+scope: engineering
+stability: stable
+last-verified: 2026-04-25
+---
+
 # Supabase — Database & Auth Patterns
 
+> **What this is:** Patterns for using Supabase as the backend (DB, auth, RLS, storage).
+> **When to read it:** When implementing any DB query, auth flow, or RLS policy.
+> **What it doesn't cover:** Whether Supabase is even right for the project — see `stack-guide.md`.
+
 Patterns for using Supabase as the backend for Vulkan Engineering apps.
-These are general principles — not all apps need Supabase. See STACK-GUIDE.md.
+These are general principles — not all apps need Supabase. See `stack-guide.md`.
 
 ---
 

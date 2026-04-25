@@ -1,6 +1,19 @@
-# Next.js App Router -- Patterns & Conventions
+---
+file: engineering/nextjs.md
+audience: [human, ai]
+scope: engineering
+stability: stable
+last-verified: 2026-04-25
+---
 
-Playbook for AI agents building Vulkan Engineering applications with Next.js 15+ App Router and Supabase.
+# Next.js App Router — Patterns & Conventions
+
+> **What this is:** Comprehensive playbook for Vulkan apps on Next.js 15+ App Router with Supabase.
+> **When to read it:** Before writing any auth, server action, data-fetching, form, or layout code.
+> **What it doesn't cover:** UI component classes (see `design/components.md`), Supabase RLS specifics (see `supabase.md`), deployment (see `deploy.md`).
+> **Quick reference:** `fragments/nextjs-essentials.md` is a 1-page summary for AI plugin context.
+
+Playbook for AI agents and humans building Vulkan Engineering applications with Next.js 15+ App Router and Supabase.
 
 ## Table of Contents
 

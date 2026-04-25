@@ -1,6 +1,16 @@
+---
+file: design/accessibility.md
+audience: [human, ai]
+scope: design
+stability: stable
+last-verified: 2026-04-25
+---
+
 # Accessibility
 
-> The non-negotiable accessibility minimums for all Vulkan Engineering apps.
+> **What this is:** The non-negotiable a11y minimums every Vulkan app must satisfy.
+> **When to read it:** Before shipping any user-facing UI. Run through the checklist before each release.
+> **What it doesn't cover:** Component-specific ARIA patterns (those are inline in `components.md`).
 
 ## Principles
 

@@ -1,0 +1,12 @@
+{
+  "name": "vuleng-design",
+  "version": "1.0.0",
+  "description": "Claude Code plugin for the Vulkan Engineering design system. Provides skills that auto-load Vulkan UI rules, full-stack engineering patterns, and a project bootstrapper. Sister plugin to vulkan-skills.",
+  "author": "Vulkan Engineering",
+  "homepage": "https://github.com/vuleng/vuleng-design-system",
+  "skills": [
+    "skills/vulkan-ui",
+    "skills/vulkan-stack",
+    "skills/vulkan-bootstrap"
+  ]
+}

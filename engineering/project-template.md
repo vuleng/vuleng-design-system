@@ -1,4 +1,16 @@
+---
+file: engineering/project-template.md
+audience: [human, ai]
+scope: engineering
+stability: stable
+last-verified: 2026-04-25
+---
+
 # Project Template — Starting a New Vulkan App
+
+> **What this is:** Bootstrap blueprint — directory layout, `CLAUDE.md` template, `docs/` structure for new Vulkan apps.
+> **When to read it:** When scaffolding a new repo. Better yet: trigger the `vulkan-bootstrap` plugin skill to do it for you.
+> **What it doesn't cover:** Living-doc maintenance after bootstrap (see `documentation.md`).
 
 Use this as a blueprint when starting a new project. Copy/adapt the
 relevant sections into your project's `CLAUDE.md` and `docs/` folder.
@@ -46,7 +58,7 @@ CRITICAL: Update docs in the SAME commit as the code change. Never batch.
 
 ---
 
-## Design System: @vuleng/tailwind-preset
+## Design System: @vuleng/design-system
 
 [Copy the design system rules from the preset's ai/CLAUDE.md]
 

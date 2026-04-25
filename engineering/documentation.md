@@ -1,4 +1,16 @@
+---
+file: engineering/documentation.md
+audience: [human, ai]
+scope: engineering
+stability: stable
+last-verified: 2026-04-25
+---
+
 # Living Documentation — Vulkan Engineering
+
+> **What this is:** The living-doc standard — focused per-concern files in `docs/`, AI-readable, updated in the same commit as code.
+> **When to read it:** When setting up a new project's `docs/`, or when deciding whether a code change requires a doc update.
+> **What it doesn't cover:** This file (the design system's own docs). For meta-docs about this repo, see `CONTRIBUTING.md`.
 
 Guidelines for project documentation that helps AI assistants work efficiently without drifting from the codebase.
 

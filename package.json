@@ -1,26 +1,37 @@
 {
-  "name": "@vuleng/tailwind-preset",
-  "version": "1.2.0",
-  "description": "Shared design system for Vulkan Engineering — Tailwind preset, full-stack architecture guides, AI instructions.",
-  "main": "preset.js",
+  "name": "@vuleng/design-system",
+  "version": "2.0.0",
+  "description": "Vulkan Engineering design system — Tailwind v4 preset, multi-theme, full-stack guides, Claude Code plugin.",
   "exports": {
-    ".": "./preset.js"
+    ".": "./index.css",
+    "./preset": "./preset.css",
+    "./preset.css": "./preset.css",
+    "./themes/vulkan": "./themes/vulkan.css",
+    "./themes/vulkan.css": "./themes/vulkan.css",
+    "./themes/example-acme": "./themes/example-acme.css"
   },
   "files": [
-    "preset.js",
-    "ai/"
+    "index.css",
+    "preset.css",
+    "themes/",
+    "design/",
+    "engineering/",
+    "fragments/",
+    "ai/",
+    "scripts/build-fragments.mjs"
   ],
   "keywords": [
     "tailwindcss",
-    "preset",
+    "tailwindcss-v4",
+    "design-system",
     "vulkan",
-    "design-system"
+    "vuleng"
   ],
   "author": "Vulkan Engineering",
   "license": "UNLICENSED",
   "private": true,
   "peerDependencies": {
-    "tailwindcss": ">=3.3.0"
+    "tailwindcss": "^4.0.0"
   },
   "devDependencies": {
     "tailwindcss": "^4.2.1"

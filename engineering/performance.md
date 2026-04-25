@@ -1,4 +1,16 @@
+---
+file: engineering/performance.md
+audience: [human, ai]
+scope: engineering
+stability: stable
+last-verified: 2026-04-25
+---
+
 # Performance Best Practices
+
+> **What this is:** Measured rules from real Vulkan projects — region co-location, auth dedup, caching, query discipline.
+> **When to read it:** Before deploying any auth-gated app, before adding caching, when measuring slow pages.
+> **What it doesn't cover:** UI animation perf (see `design/motion.md`).
 
 Measured guidelines from real Vulkan projects. Every rule here was learned
 by hitting a performance problem, measuring it, and fixing it.

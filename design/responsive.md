@@ -1,6 +1,16 @@
+---
+file: design/responsive.md
+audience: [human, ai]
+scope: design
+stability: stable
+last-verified: 2026-04-25
+---
+
 # Responsive Design
 
-> Breakpoints, layout conventions, and mobile-first patterns for all Vulkan Engineering apps.
+> **What this is:** Breakpoints, layout conventions, mobile-first patterns.
+> **When to read it:** When building any layout that must work on phones and desktops. Default to mobile-first.
+> **What it doesn't cover:** Component sizing within a layout (see `components.md`).
 
 ## Approach
 

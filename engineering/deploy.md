@@ -1,4 +1,16 @@
+---
+file: engineering/deploy.md
+audience: [human, ai]
+scope: engineering
+stability: stable
+last-verified: 2026-04-25
+---
+
 # Deployment & Infrastructure
+
+> **What this is:** Vercel setup, region config, env vars, custom domains, monitoring.
+> **When to read it:** Before first deploy of a new app, when changing regions, or when configuring a custom domain.
+> **What it doesn't cover:** Performance tuning post-deploy (see `performance.md`).
 
 How to deploy Vulkan Engineering apps. Vercel is the recommended platform
 for both Next.js and Astro projects.

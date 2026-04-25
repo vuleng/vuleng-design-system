@@ -1,4 +1,16 @@
+---
+file: engineering/stack-guide.md
+audience: [human, ai]
+scope: engineering
+stability: stable
+last-verified: 2026-04-25
+---
+
 # Stack Guide — When to Use What
+
+> **What this is:** Decision tree for picking the right framework + backend per project type.
+> **When to read it:** Before starting a new project. Don't skip — getting this wrong costs weeks.
+> **What it doesn't cover:** How to actually use each stack — see the per-stack docs in this folder.
 
 This guide helps you pick the right technology for a Vulkan Engineering project.
 Not every project needs a database, and not every website needs a framework.
@@ -49,7 +61,7 @@ For company sites, blogs, documentation — content managed by non-developers.
 | Frontend | Astro | Partial hydration, fast by default, great for content |
 | CMS | Sanity | Structured content, real-time preview, GROQ queries |
 | Hosting | Vercel | Auto-deploy, CDN, preview deployments |
-| Styling | Tailwind CSS + @vuleng/tailwind-preset | Brand consistency |
+| Styling | Tailwind CSS + @vuleng/design-system | Brand consistency |
 
 **Example:** vuleng.no — company website with editable content.
 
@@ -61,7 +73,7 @@ For landing pages, documentation, simple brochure sites.
 |-------|-----------|-----|
 | Frontend | Astro or plain HTML/CSS | Minimal JS, fast loading |
 | Hosting | Vercel or GitHub Pages | Free, simple |
-| Styling | Tailwind CSS + @vuleng/tailwind-preset | Brand consistency |
+| Styling | Tailwind CSS + @vuleng/design-system | Brand consistency |
 
 **Example:** Project documentation site, event landing page.
 
@@ -95,7 +107,7 @@ For landing pages, documentation, simple brochure sites.
 - Use the cheapest model that works (Haiku for speed, Sonnet for quality, Opus for complex reasoning).
 
 ### Styling
-- **Tailwind CSS + @vuleng/tailwind-preset** — mandatory for all Vulkan projects. Provides brand tokens, component classes, dark mode.
+- **Tailwind CSS + @vuleng/design-system** — mandatory for all Vulkan projects. Provides brand tokens, component classes, dark mode.
 
 ### Validation
 - **Zod** — for form validation, API input validation, and type inference. Schema-first approach.

@@ -1,0 +1,170 @@
+/*
+ * @vuleng/design-system — themes/vulkan.css
+ *
+ * The Vulkan Engineering brand theme.
+ *
+ * Defines:
+ *   • Brand colors (Vulkan orange + navy)
+ *   • Navy-tinted neutrals for surfaces, borders, text
+ *   • Dark-mode overrides on the .dark class
+ *   • Legacy `vulkan-*` token aliases (so v1 class names like `bg-vulkan-orange`
+ *     continue to work after the v2.0 upgrade with no code changes)
+ *   • Vulkan-only ramped scales (`orange-50..950`, `navy-50..950`) — these
+ *     are NOT theme-overridable and exist only for the Vulkan brand
+ *
+ * Use as the second @import after preset.css. The package root
+ * `@import "@vuleng/design-system"` includes both automatically.
+ */
+
+@theme {
+  /* ── Brand — Vulkan Orange ── */
+  --color-brand-primary: #FF8935;
+  --color-brand-primary-rgb: 255 137 53;
+  --color-brand-primary-hover: #F06400;
+  --color-brand-primary-hover-rgb: 240 100 0;
+  --color-brand-primary-light: #FFB885;
+  --color-brand-primary-light-rgb: 255 184 133;
+
+  /* ── Brand — Vulkan Navy ── */
+  --color-brand-accent: #183653;
+  --color-brand-accent-rgb: 24 54 83;
+  --color-brand-accent-hover: #122A42;
+  --color-brand-accent-hover-rgb: 18 42 66;
+
+  /* ── Surfaces (light mode) ── */
+  --color-page-bg: #F5F9FF;
+  --color-surface: #ffffff;
+  --color-surface-rgb: 255 255 255;
+  --color-surface-subtle: #f7f9fb;
+  --color-surface-subtle-rgb: 247 249 251;
+  --color-card-bg: #ffffff;
+  --color-card-bg-rgb: 255 255 255;
+
+  /* ── Borders (light mode) ── */
+  --color-border: #dce3eb;
+  --color-border-rgb: 196 206 217;
+  --color-border-input: #c4ced9;
+  --color-border-input-rgb: 196 206 217;
+
+  /* ── Text (light mode) ── */
+  --color-text-default: #1D1D1D;
+  --color-text-muted: #6b7d8f;
+  --color-placeholder: #94a3b4;
+
+  /* ── Inputs (light mode) ── */
+  --color-input-bg: #ffffff;
+
+  /* ── Functional / status ── */
+  --color-danger: #dc2626;
+  --color-danger-rgb: 220 38 38;
+  --color-danger-hover: #b91c1c;
+  --color-danger-hover-rgb: 185 28 28;
+
+  /* ── Disabled (light mode) ── */
+  --color-disabled-bg: #c4ced9;
+  --color-disabled-fg: #6b7d8f;
+
+  /* ── Skeleton ── */
+  --color-skeleton: #edf1f5;
+
+  /* ── Shadow tint (RGB triplet — used by --shadow-elevation-* in preset.css) ── */
+  --color-shadow-rgb: 24 54 83;
+
+  /* ── Dark-mode counterparts (set on .dark below; declared here so utilities
+   *    that reference them generate even when not currently in dark mode) ── */
+  --color-text-default-dark: #e2e8f0;
+  --color-text-muted-dark: #94a3b8;
+  --color-placeholder-dark: #6b7d8f;
+  --color-surface-rgb-dark: 30 41 59;
+  --color-card-bg-rgb-dark: 40 53 72;
+  --color-border-rgb-dark: 71 85 105;
+  --color-input-bg-dark: #283548;
+  --color-border-input-dark: #4a5e71;
+  --color-disabled-bg-dark: #364b5e;
+  --color-disabled-fg-dark: #6b7d8f;
+  --color-skeleton-dark: #253a4d;
+
+  /* ── Navy-tinted neutrals (Vulkan-only — do not use in white-label code) ── */
+  --color-neutral-50: #f7f9fb;
+  --color-neutral-100: #edf1f5;
+  --color-neutral-200: #dce3eb;
+  --color-neutral-300: #c4ced9;
+  --color-neutral-400: #94a3b4;
+  --color-neutral-500: #6b7d8f;
+  --color-neutral-600: #4a5e71;
+  --color-neutral-700: #364b5e;
+  --color-neutral-800: #253a4d;
+  --color-neutral-900: #1a2c3d;
+  --color-neutral-950: #0f1c2a;
+
+  /* ── Orange ramp (Vulkan-only) ── */
+  --color-orange-50: #fff8f0;
+  --color-orange-100: #ffedd9;
+  --color-orange-200: #ffd9b3;
+  --color-orange-300: #FFB885;
+  --color-orange-400: #FF8935;
+  --color-orange-500: #F06400;
+  --color-orange-600: #cc5500;
+  --color-orange-700: #a34400;
+  --color-orange-800: #7a3300;
+  --color-orange-900: #522200;
+  --color-orange-950: #331500;
+
+  /* ── Navy ramp (Vulkan-only) ── */
+  --color-navy-50: #F5F9FF;
+  --color-navy-100: #e0eaf4;
+  --color-navy-200: #b8cce0;
+  --color-navy-300: #8faec9;
+  --color-navy-400: #5c83a8;
+  --color-navy-500: #3a6389;
+  --color-navy-600: #2a4d6d;
+  --color-navy-700: #183653;
+  --color-navy-800: #122a42;
+  --color-navy-900: #0d1f31;
+  --color-navy-950: #081420;
+
+  /* ── Dark surfaces (Vulkan-only literal values, exposed as utilities) ── */
+  --color-dark-bg: #0f172a;
+  --color-dark-surface: #1e293b;
+  --color-dark-card: #283548;
+
+  /* ── Legacy v1.x aliases — keep `bg-vulkan-orange`, `text-vulkan-navy`, etc.
+   *    working without code changes in apps upgrading from v1.x. ── */
+  --color-vulkan-orange: #FF8935;
+  --color-vulkan-orange-hover: #F06400;
+  --color-vulkan-orange-light: #FFB885;
+  --color-vulkan-navy: #183653;
+  --color-vulkan-bg: #F5F9FF;
+  --color-vulkan-gray: #3F3F3F;
+  --color-vulkan-black: #1D1D1D;
+}
+
+/* ────────────────────────────────────────────────────────────────────────────
+ * Dark mode — variable overrides only. The .dark class on <html> flips the
+ * variables that the components in preset.css already reference; no separate
+ * component CSS for dark mode is needed.
+ * ────────────────────────────────────────────────────────────────────────── */
+.dark {
+  --color-page-bg: #0f172a;
+  --color-surface: #1e293b;
+  --color-surface-rgb: 30 41 59;
+  --color-surface-subtle: #1e293b;
+  --color-surface-subtle-rgb: 30 41 59;
+  --color-card-bg: #283548;
+  --color-card-bg-rgb: 40 53 72;
+
+  --color-border: #374151;
+  --color-border-rgb: 71 85 105;
+
+  --color-text-default: #e2e8f0;
+  --color-text-muted: #94a3b8;
+  --color-placeholder: #6b7d8f;
+
+  --color-input-bg: #283548;
+  --color-border-input: #4a5e71;
+
+  --color-disabled-bg: #364b5e;
+  --color-disabled-fg: #6b7d8f;
+
+  --color-skeleton: #253a4d;
+}

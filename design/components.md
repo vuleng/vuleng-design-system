@@ -1,12 +1,24 @@
+---
+file: design/components.md
+audience: [human, ai]
+scope: design
+stability: stable
+last-verified: 2026-04-25
+---
+
 # Component Patterns
 
-> Framework-agnostic UI patterns for Vulkan Engineering apps. These are *recipes*, not implementations — adapt to Vue, Astro, React, or plain HTML as needed.
+> **What this is:** Framework-agnostic UI recipes for buttons, cards, inputs, modals, toasts, badges, skeletons, and empty states.
+> **When to read it:** When implementing any UI surface. The component CSS classes are defined in `preset.css`; this file shows how to apply them.
+> **What it doesn't cover:** The bare class API (see `fragments/component-classes.md`) or color tokens (see `colors.md`).
+
+The recipes below are *patterns*, not implementations — adapt to React, Astro, Vue, or plain HTML as needed.
 
 ## Buttons
 
 Four button styles with a **soft glass** aesthetic — semi-transparent backgrounds, `backdrop-blur`, thin light borders, and smooth opacity transitions. No `translateY` bounce.
 
-All classes are provided by the `@vuleng/tailwind-preset`. Use them directly — no extra Tailwind needed.
+All classes are provided by `@vuleng/design-system`. Use them directly — no extra Tailwind needed. For the full class API reference, see `fragments/component-classes.md`.
 
 ### Primary Button
 

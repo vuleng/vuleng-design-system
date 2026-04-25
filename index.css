@@ -1,0 +1,15 @@
+/*
+ * @vuleng/design-system — index.css (default entry)
+ *
+ * Loads the core preset + the Vulkan brand theme.
+ *
+ *   import "@vuleng/design-system";
+ *
+ * For client-themed apps, import the preset and your own theme separately:
+ *
+ *   @import "@vuleng/design-system/preset";
+ *   @import "./themes/acme.css";
+ */
+
+@import "./preset.css";
+@import "./themes/vulkan.css";

@@ -1,140 +1,110 @@
-# @vuleng/tailwind-preset
+# @vuleng/design-system
 
-Shared design system for Vulkan Engineering — delivered as a **Tailwind CSS preset**.
+The complete starting kit for Vulkan Engineering app development — Tailwind v4 preset, multi-theme architecture, full-stack engineering guides, and a Claude Code plugin for AI-driven development.
 
-Includes brand tokens (colors, fonts, dark mode surfaces), and component classes (`.btn-primary`, `.btn-secondary`, `.btn-ghost`, `.btn-danger`, `.card`, `.input-field`, `.badge`) with a **soft glass** aesthetic.
+> Part of the [Vulkan Engineering Company OS](https://github.com/vuleng/vuleng-company-os). For organisational context (tone of voice, processes, identity), see that repo.
 
-Uses **navy-tinted neutrals** instead of generic grays for a cohesive, non-template look across light and dark mode.
+---
 
-> Part of the [Vulkan Engineering Company OS](https://github.com/vuleng/vuleng-company-os). For company identity, tone of voice, processes and organisational context, see that repo.
+## Where do I start?
 
-## Quick Start
+| Use case | Click path |
+|----------|-----------|
+| **Building a new Vulkan-branded app** | [`engineering/00-overview.md`](engineering/00-overview.md) → pick a stack → scaffold |
+| **Looking up a design token or class** | [`design/00-overview.md`](design/00-overview.md) → [`colors.md`](design/colors.md) / [`components.md`](design/components.md) |
+| **Delivering a client-branded app** | [`design/theming.md`](design/theming.md) — author a theme without forking |
+| **Setting up AI-assisted dev** | [`ai/README.md`](ai/README.md) — install the plugin or read docs directly |
+| **Upgrading from v1.x** | [`MIGRATION.md`](MIGRATION.md) |
+| **Hitting a build or theme issue** | [`engineering/troubleshooting.md`](engineering/troubleshooting.md) |
+
+---
+
+## Install
 
 ```bash
-npm install github:vuleng/vuleng-design-system#v1.2.0
+npm install github:vuleng/vuleng-design-system#v2.0.0
 ```
 
-**ESM project (Vite, etc.):**
-
-```js
-// tailwind.config.js
-import { createRequire } from 'module'
-const require = createRequire(import.meta.url)
-
-export default {
-  presets: [require('@vuleng/tailwind-preset')],
-  content: ['./src/**/*.{vue,js,ts,jsx,tsx,astro,html}'],
-}
-```
-
-**CJS project:**
-
-```js
-// tailwind.config.js
-module.exports = {
-  presets: [require('@vuleng/tailwind-preset')],
-  content: ['./src/**/*.{vue,js,ts,jsx,tsx,astro,html}'],
-}
-```
+Add to your project's main CSS file (e.g. `src/app/globals.css`):
 
 ```css
-/* main.css */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "@vuleng/design-system";
 ```
 
-Done — all brand tokens and component classes are available.
+That's it. Vulkan branding, soft-glass components, dark mode, and Tailwind v4 utilities are all wired up.
 
-## What's Included
+For a client-branded app, see [`design/theming.md`](design/theming.md).
 
-| Feature | Details |
-|---------|---------|
-| Colors | `vulkan-orange`, `vulkan-navy`, `vulkan-bg`, dark mode surfaces, extended orange/navy scales, **navy-tinted `neutral-*` palette** |
-| Fonts | Lato (sans-serif stack) |
-| Typography | Heading tracking (`-0.02em`), body line-height (`1.6`), `max-w-prose`, `text-balance`, `text-pretty` |
-| Dark mode | Class-based (`darkMode: 'class'`) |
-| Buttons | `.btn-primary`, `.btn-secondary`, `.btn-ghost`, `.btn-danger`, `.btn-navy` (soft glass, hover lift) |
-| Button sizes | `.btn-sm`, `.btn-lg` |
-| Cards | `.card`, `.card-raised`, `.card-floating` (glass with 3-tier elevation) |
-| Inputs | `.input-field`, `.select-field` (navy-tinted borders, double-ring focus) |
-| Badges | `.badge` |
-| Skeletons | `.skeleton`, `.skeleton-text`, `.skeleton-heading`, `.skeleton-avatar` |
-| Shadows | `shadow-elevation-1`, `shadow-elevation-2`, `shadow-elevation-3` |
-| Motion | `prefers-reduced-motion` global support, button hover-lift built in |
+---
 
-## Documentation
+## What ships in v2.0
 
-### Design (UI)
-| File | Content |
-|------|---------|
-| [BRAND.md](BRAND.md) | Colors, typography, logo rules, iconography, no-emoji policy |
-| [COMPONENTS.md](COMPONENTS.md) | Button, card, input, modal, toast, badge, skeleton, empty state patterns |
-| [TAILWIND.md](TAILWIND.md) | Preset usage, manual config fallback, CSS custom properties |
-| [DARK_MODE.md](DARK_MODE.md) | Dark mode strategy and tokens |
-| [ANIMATIONS.md](ANIMATIONS.md) | Motion and transition guidelines |
-| [ACCESSIBILITY.md](ACCESSIBILITY.md) | a11y requirements |
-| [RESPONSIVE.md](RESPONSIVE.md) | Breakpoint and spacing strategy |
+| Pillar | Where |
+|--------|-------|
+| **Tailwind v4 preset** | `preset.css` — neutral tokens, variants, component classes (theme-agnostic) |
+| **Vulkan brand theme** | `themes/vulkan.css` — colors, font, radii, dark mode |
+| **Example client theme** | `themes/example-acme.css` — proof of concept for white-label |
+| **Design docs** | `design/` — colors, components, dark mode, motion, accessibility, responsive, brand, theming |
+| **Engineering guides** | `engineering/` — Next.js, Supabase, performance, deploy, testing, project bootstrap, troubleshooting |
+| **Single-source fragments** | `fragments/` — color tokens, anti-patterns, component API, requirements (used by docs + plugin) |
+| **Claude Code plugin** | `ai/plugin/` — `vulkan-ui`, `vulkan-stack`, `vulkan-bootstrap` skills |
+| **Build pipeline** | `scripts/build-fragments.mjs` — resolves `<!-- include: -->` markers at release |
 
-### Engineering (Full-Stack)
-| File | Content |
-|------|---------|
-| [STACK-GUIDE.md](STACK-GUIDE.md) | When to use Next.js vs Astro vs static. Decision tree + stack profiles. |
-| [PERFORMANCE.md](PERFORMANCE.md) | Region co-location, auth dedup, caching, query discipline. Measured results. |
-| [NEXTJS.md](NEXTJS.md) | App Router patterns: auth flow, server actions, forms, modals, search, testing. |
-| [SUPABASE.md](SUPABASE.md) | Database queries, auth patterns, RLS, caching with admin client. |
-| [DEPLOY.md](DEPLOY.md) | Vercel setup, region config, environment variables, domain setup. |
-| [PROJECT-TEMPLATE.md](PROJECT-TEMPLATE.md) | CLAUDE.md template, directory structure, docs/ blueprint for new projects. |
-| [DOCUMENTATION.md](DOCUMENTATION.md) | Living documentation standard, CLAUDE.md template, lessons learned |
+---
+
+## Key Concepts
+
+**Soft-glass aesthetic.** Surfaces are semi-transparent with backdrop blur. Borders are thin and tinted. Shadows use the active theme's accent color at low alpha. Motion is functional, not decorative.
+
+**Multi-theme.** Default Vulkan branding lives in `themes/vulkan.css`. Client themes override CSS variables for brand colors, font, radii, and shadow tint — no forking, no per-class overrides. Density, type scale, and motion stay locked.
+
+**Tailwind v4 native.** All theming via `@theme` directives. No `tailwind.config.js`. Distribution via `@import` from a published CSS file.
+
+**Lazy AI context.** The Claude Code plugin loads design docs only when relevant skills trigger — 6000+ lines of guidance never sit idle in context.
+
+---
 
 ## Standard Application Requirements
 
-All Vulkan Engineering applications must implement:
+Every Vulkan Engineering app must implement:
 
-1. **Internationalization**: Norwegian (default) + English, using translation keys and `localStorage`
-2. **Dark/Light Mode**: Class-based toggle with `localStorage` persistence
-3. **Living Documentation**: Focused `docs/` directory following [DOCUMENTATION.md](DOCUMENTATION.md)
-4. **Test Discipline**: Tests updated in same commit as code changes
+1. **i18n:** Norwegian (default) + English with `localStorage` persistence.
+2. **Dark/light mode:** Class-based toggle with `localStorage` persistence.
+3. **Living docs:** Focused `docs/` folder updated in same commit as code.
+4. **Test discipline:** Vitest + RTL; tests updated in same commit as source.
 
-The AI instruction files (`ai/CLAUDE.md`, `ai/copilot-instructions.md`) include framework-specific sections for **Next.js** and **Astro + Sanity** projects. Copy the relevant sections when setting up a new project.
+See [`fragments/standard-requirements.md`](fragments/standard-requirements.md) for the canonical statement.
 
-## AI Instructions (for Copilot, Claude, Cursor)
+---
 
-The `ai/` folder contains instruction files that make AI assistants follow the design system automatically.
+## Updating apps when this preset releases
 
-Copy the appropriate file into each consuming project:
+1. Bump version: `git tag v2.x.y && git push --tags`
+2. In each consuming app, update the pin in `package.json` and run `npm install`.
+3. Read [`CHANGELOG.md`](CHANGELOG.md) for any breaking changes — for non-major bumps, no code changes should be required.
+4. Rebuild and verify dark mode + a few key surfaces render correctly.
 
-**GitHub Copilot (VS Code):**
-```bash
-# Copy into .github/ in your project
-cp node_modules/@vuleng/tailwind-preset/ai/copilot-instructions.md .github/copilot-instructions.md
+---
+
+## Repo layout
+
+```
+vuleng-design-system/
+├── README.md, CHANGELOG.md, MIGRATION.md, CONTRIBUTING.md
+├── package.json
+├── index.css                # default entry: preset + Vulkan theme
+├── preset.css               # core: variants, components, neutral tokens
+├── themes/                  # brand themes (Vulkan + example client)
+├── design/                  # design pillar (colors, components, etc.)
+├── engineering/             # engineering pillar (Next, Supabase, etc.)
+├── fragments/               # single-source-of-truth snippets
+├── ai/plugin/               # Claude Code plugin
+├── scripts/                 # build-fragments.mjs
+└── logo.png, logo_dark.png
 ```
 
-**Claude Code / Claude Projects:**
-```bash
-# Copy into project root
-cp node_modules/@vuleng/tailwind-preset/ai/CLAUDE.md CLAUDE.md
-```
+---
 
-**Cursor:**
-```bash
-# Copy into .cursor/rules/
-mkdir -p .cursor/rules
-cp node_modules/@vuleng/tailwind-preset/ai/copilot-instructions.md .cursor/rules/vulkan-design.md
-```
+## License
 
-These files contain the complete design rules: colors, components, typography, spacing, dark mode, motion, anti-patterns. The AI assistant will automatically follow these when generating UI code.
-
-| File | Target | Purpose |
-|------|--------|---------|
-| [ai/copilot-instructions.md](ai/copilot-instructions.md) | `.github/copilot-instructions.md` | GitHub Copilot in VS Code |
-| [ai/CLAUDE.md](ai/CLAUDE.md) | `CLAUDE.md` in project root | Claude Code, Claude Projects |
-
-## Updating Apps
-
-When the preset is updated:
-
-1. Bump the version in `package.json`
-2. Tag the release: `git tag v1.x.x && git push --tags`
-3. In each consuming app: update the tag in `package.json` and run `npm install`
-4. Rebuild — done
+UNLICENSED. Internal Vulkan Engineering use.
