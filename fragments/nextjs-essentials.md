@@ -3,12 +3,13 @@ fragment: nextjs-essentials
 audience: [human, ai]
 scope: engineering
 stability: stable
-last-verified: 2026-04-25
+last-verified: 2026-04-26
 ---
 
-<!-- Quick-reference summary of Next.js patterns. The full playbook is in
-     engineering/nextjs.md — this fragment is what AI plugin skills load
-     to give baseline context without reading 1400+ lines. -->
+<!-- Quick-reference summary of Next.js patterns. The full playbook is split
+     across engineering/nextjs.md (overview), nextjs-auth.md, nextjs-data.md,
+     and nextjs-forms.md — this fragment is what AI plugin skills load
+     to give baseline context without reading any of them in full. -->
 
 ## Next.js (App Router) Essentials
 
@@ -70,4 +71,4 @@ src/
 - Server actions cannot be imported into Vitest — extract Zod schemas and test those separately.
 - Use React Testing Library for components, mock Supabase via the client factory.
 
-For full patterns including caching strategies, region co-location, RLS, and performance benchmarks, see `engineering/nextjs.md`, `engineering/supabase.md`, and `engineering/performance.md`.
+For full patterns, drop into the topic-specific file: `engineering/nextjs.md` (structure / server vs client / loading / i18n), `engineering/nextjs-auth.md` (middleware, role gating), `engineering/nextjs-data.md` (fetching, server actions, caching), `engineering/nextjs-forms.md` (forms, modals, search), `engineering/testing.md` (Vitest, RTL, Zod schema tests), plus `engineering/supabase.md` and `engineering/performance.md`.

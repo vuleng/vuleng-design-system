@@ -3,7 +3,7 @@ file: engineering/testing.md
 audience: [human, ai]
 scope: engineering
 stability: stable
-last-verified: 2026-04-25
+last-verified: 2026-04-26
 ---
 
 # Testing
@@ -45,6 +45,22 @@ last-verified: 2026-04-25
 - Test the user-visible behavior, not the implementation. Use queries like `getByRole`, `getByLabelText`, `getByText`. Avoid `getByTestId` unless nothing else works.
 - Mock at the boundary: mock the Supabase client, not internal lib functions.
 
+### Test Layout
+
+```
+src/__tests__/
+  actions/
+    action-schemas.test.ts     # Zod schema validation
+  components/
+    ui/
+      grade-badge.test.tsx     # UI primitives
+    confirm-modal.test.tsx     # Modal behavior
+    route-form.test.tsx        # Form components
+  lib/
+    access.test.ts             # Auth helpers
+    utils.test.ts              # Utility functions
+```
+
 ## Server Action Testing
 
 **Server actions cannot be imported in Vitest.** They run in a Next.js server context that's not available to the test runner.
@@ -78,6 +94,115 @@ it("rejects negative grade", () => {
   const r = createRouteSchema.safeParse({ grade: "-1" });
   expect(r.success).toBe(false);
 });
+```
+
+### Worked Example: Zod Schema Tests
+
+```ts
+// src/__tests__/actions/action-schemas.test.ts
+import { describe, expect, it } from "vitest";
+import { RouteCreateSchema, IdSchema } from "@/lib/validation/mutations";
+
+describe("RouteCreateSchema", () => {
+  it("accepts a valid route payload", () => {
+    const result = RouteCreateSchema.safeParse({
+      name: "  Apegutt  ",
+      grade: " 6+ ",
+      type: "sport",
+      description: "  Nice movement  ",
+      sector_id: "123e4567-e89b-12d3-a456-426614174000",
+      length: "25",
+    });
+
+    expect(result.success).toBe(true);
+    if (result.success) {
+      expect(result.data.name).toBe("Apegutt");   // trimmed
+      expect(result.data.length).toBe(25);          // coerced to number
+    }
+  });
+
+  it("normalizes blank optional values to null", () => {
+    const result = RouteCreateSchema.safeParse({
+      name: "Test",
+      grade: "6a",
+      type: "boulder",
+      description: "",
+      setter: "",
+      length: "",
+    });
+
+    expect(result.success).toBe(true);
+    if (result.success) {
+      expect(result.data.description).toBeNull();
+      expect(result.data.length).toBeNull();
+    }
+  });
+});
+```
+
+## Testing Components with RTL and userEvent
+
+```tsx
+// src/__tests__/components/confirm-modal.test.tsx
+import { describe, it, expect, vi, beforeEach } from "vitest";
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import ConfirmModal from "@/components/confirm-modal";
+
+describe("ConfirmModal", () => {
+  const defaultProps = {
+    open: true,
+    title: "Delete route",
+    description: "Are you sure?",
+    confirmLabel: "Delete",
+    onConfirm: vi.fn(),
+    onCancel: vi.fn(),
+  };
+
+  beforeEach(() => vi.clearAllMocks());
+
+  it("renders nothing when open is false", () => {
+    const { container } = render(<ConfirmModal {...defaultProps} open={false} />);
+    expect(container.innerHTML).toBe("");
+  });
+
+  it("calls onConfirm when confirm button is clicked", async () => {
+    const user = userEvent.setup();
+    render(<ConfirmModal {...defaultProps} />);
+    await user.click(screen.getByText("Delete"));
+    expect(defaultProps.onConfirm).toHaveBeenCalledOnce();
+  });
+
+  it("calls onCancel on Escape key", async () => {
+    const user = userEvent.setup();
+    render(<ConfirmModal {...defaultProps} />);
+    await user.keyboard("{Escape}");
+    expect(defaultProps.onCancel).toHaveBeenCalledOnce();
+  });
+
+  it("has dialog role with aria-modal", () => {
+    render(<ConfirmModal {...defaultProps} />);
+    const dialog = screen.getByRole("dialog");
+    expect(dialog).toHaveAttribute("aria-modal", "true");
+  });
+});
+```
+
+## Mocking Supabase
+
+```ts
+vi.mock("@/lib/supabase/server", () => ({
+  createClient: vi.fn(() => ({
+    from: vi.fn(() => ({
+      select: vi.fn().mockReturnThis(),
+      eq: vi.fn().mockReturnThis(),
+      single: vi.fn().mockResolvedValue({ data: mockData, error: null }),
+    })),
+    auth: {
+      getUser: vi.fn().mockResolvedValue({ data: { user: { id: "user-1" } } }),
+    },
+  })),
+}));
 ```
 
 ## Pre-Push Discipline

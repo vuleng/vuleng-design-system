@@ -9,17 +9,20 @@ You are working on the back-end / full-stack side of a Vulkan Engineering app. T
 
 ## When this skill triggers
 
-Read these files in order. Skip any that aren't relevant to the user's specific question:
+Read these files in order. Skip any that aren't relevant to the user's specific question — the Next.js playbook is split by topic so you only load what you need:
 
 1. **Always orient:** `engineering/00-overview.md`.
 2. **Stack-pick decisions:** `engineering/stack-guide.md`.
 3. **Quick context (always pre-read):** `fragments/nextjs-essentials.md`.
-4. **Next.js patterns:** `engineering/nextjs.md`.
-5. **Supabase / DB / auth / RLS:** `engineering/supabase.md`.
-6. **Performance, caching, region setup:** `engineering/performance.md`.
-7. **Vercel deploy, env vars, domains:** `engineering/deploy.md`.
-8. **Test setup, conventions:** `engineering/testing.md`.
-9. **Astro + Sanity (only if working on a content site):** `engineering/astro-sanity.md`.
+4. **Next.js — overview, project structure, server vs client, loading & error boundaries, file naming, i18n, Supabase client cheat sheet:** `engineering/nextjs.md`.
+5. **Next.js — auth (middleware, getClaims, role gating, server-action helpers):** `engineering/nextjs-auth.md`.
+6. **Next.js — data fetching, server actions, `unstable_cache`, revalidation:** `engineering/nextjs-data.md`.
+7. **Next.js — forms (Zod, ErrorAlert, optimistic updates), modals, Cmd+K search:** `engineering/nextjs-forms.md`.
+8. **Supabase / DB / auth / RLS:** `engineering/supabase.md`.
+9. **Performance, caching, region setup:** `engineering/performance.md`.
+10. **Vercel deploy, env vars, domains:** `engineering/deploy.md`.
+11. **Test setup, conventions, RTL, Zod schema tests:** `engineering/testing.md`.
+12. **Astro + Sanity (only if working on a content site):** `engineering/astro-sanity.md`.
 
 ## Hard Rules
 

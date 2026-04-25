@@ -35,7 +35,7 @@ vuleng-design-system/
 | Standard requirements (i18n, dark mode, testing) | `fragments/standard-requirements.md` |
 | Light↔dark color mapping | `fragments/neutral-mapping.md` |
 | Next.js quick-reference for AI | `fragments/nextjs-essentials.md` |
-| Detailed Next.js patterns | `engineering/nextjs.md` |
+| Detailed Next.js patterns | `engineering/nextjs.md` (overview), `engineering/nextjs-auth.md` (auth), `engineering/nextjs-data.md` (data + actions), `engineering/nextjs-forms.md` (forms / modals / search) |
 | Detailed design rules | `design/<topic>.md` |
 | AI plugin behavior | `ai/plugin/skills/<skill>/SKILL.md` |
 | Anything human-facing | Update `CHANGELOG.md` |
@@ -88,7 +88,7 @@ Every design file ends with an `## Anti-Patterns` section listing things to NOT 
 
 ### Soft 400-line cap
 
-Files over ~400 lines should be split. Exception: `engineering/nextjs.md` (1471 lines) — split into auth/data sub-files is on the v2.x roadmap.
+Files over ~400 lines should be split. The Next.js playbook is now split across `nextjs.md` (overview), `nextjs-auth.md`, `nextjs-data.md`, and `nextjs-forms.md` — each within or near the cap. The rump `nextjs.md` runs slightly over (~520 lines) because the project-structure tree it leads with is high-value orientation; that's acceptable for an overview file dominated by code blocks.
 
 ## Theme-Adding Workflow
 
@@ -154,7 +154,7 @@ When in doubt: if 2+ Vulkan apps would benefit, it goes here. If only one app ne
 
 Tracked in `CHANGELOG.md` under "Notes" for the active major version:
 
-- Splitting `engineering/nextjs.md` into auth + data sub-files (v2.x).
+- ~~Splitting `engineering/nextjs.md` into auth + data sub-files (v2.x).~~ Done — see CHANGELOG [Unreleased].
 - Optional density theme axis (resist unless real client ask).
 - Auto-generating perceptual color ramps from a brand color (v2.x).
 - React component shipping (only if 3+ Vulkan apps emerge).
