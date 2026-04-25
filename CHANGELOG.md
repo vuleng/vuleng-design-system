@@ -2,6 +2,11 @@
 
 All notable changes to `@vuleng/design-system` (formerly `@vuleng/tailwind-preset`) are documented here. Format follows [Keep a Changelog](https://keepachangelog.com/), versions follow [SemVer](https://semver.org/).
 
+## [Unreleased]
+
+### Changed
+- Generified `engineering/supabase.md` examples (orders/products/categories/vendors instead of climbing-app domain) so AI context doesn't leak unrelated terminology into other Vulkan projects.
+
 ## [2.0.0] — 2026-04-25
 
 Major overhaul. Multi-theme support, Tailwind v4 native, AI-first documentation, Claude Code plugin replaces copy-paste AI rule files.
