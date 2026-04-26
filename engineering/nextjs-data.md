@@ -37,6 +37,7 @@ last-verified: 2026-04-26
 
 Pages are async server components. They fetch data, compute derived state, and pass plain objects to client components.
 
+<!-- example: substitute your own page name, tables, and joins -->
 ```tsx
 export default async function LocationsPage() {
   const { user } = await getCurrentUserWithProfile();
@@ -69,6 +70,7 @@ export default async function LocationsPage() {
 
 Never await sequential independent queries. Always parallelize with `Promise.all`.
 
+<!-- pattern: required Promise.all wrapper for independent queries -->
 ```ts
 // GOOD: parallel -- total time = max(query1, query2, query3)
 const [locations, sectors, routes] = await Promise.all([
@@ -87,6 +89,7 @@ const routes = await getCachedRouteGrades();
 
 Use Supabase's nested select syntax to fetch related data in one roundtrip.
 
+<!-- pattern: required nested-select syntax to avoid query waterfalls -->
 ```ts
 // GOOD: one query with nested joins
 const { data } = await admin
@@ -103,6 +106,7 @@ const location = await admin.from("locations").select("*").eq("id", sector.locat
 
 ### Select only needed columns
 
+<!-- pattern: required column-selection discipline (no select("*") on large tables) -->
 ```ts
 // GOOD: lightweight columns for list pages
 const { data } = await admin
@@ -118,6 +122,7 @@ const { data } = await admin.from("locations").select("*").order("name");
 
 Shared (non-user-specific) data uses `unstable_cache` with tag-based invalidation. The Data Cache persists across requests until a tag is invalidated.
 
+<!-- example: substitute your own CacheTags entries and cached fetcher names -->
 ```ts
 // src/lib/cache.ts
 import { unstable_cache } from "next/cache";
@@ -167,6 +172,7 @@ export const getCachedRoute = unstable_cache(
 
 When a mutation changes data, invalidate the relevant cache tags.
 
+<!-- example: substitute your own action name and tags -->
 ```ts
 "use server";
 
@@ -199,6 +205,7 @@ export async function createLocation(formData: FormData) {
 
 Split by domain entity. Each file has `"use server"` at the top.
 
+<!-- example: substitute your own action files (split by domain entity) -->
 ```
 src/app/actions/
   auth-helpers.ts           # requireRole, requireAdmin, requireEditorOrAdmin
@@ -217,6 +224,7 @@ src/app/actions/
 
 Every mutation follows the same four-step pattern:
 
+<!-- pattern: required four-step server-action structure (1. auth → 2. validate → 3. operate → 4. invalidate) -->
 ```ts
 // src/app/actions/route-actions.ts
 "use server";
@@ -273,6 +281,7 @@ export async function createRoute(data: {
 
 For actions called from client components that need to display errors in the UI:
 
+<!-- pattern: required error-return shape `Promise<{ error?: string }>` for client-callable actions -->
 ```ts
 export async function updateLocationMetadataJson(
   id: string,
@@ -302,6 +311,7 @@ export async function updateLocationMetadataJson(
 
 Client-side consumption:
 
+<!-- example: substitute your own action call and refresh strategy -->
 ```tsx
 const result = await updateLocationMetadataJson(locationId, formData);
 if (result.error) {
@@ -315,6 +325,7 @@ if (result.error) {
 
 For actions where the user modifies their own data, use `createClient()` (RLS-protected) instead of the admin client:
 
+<!-- pattern: required user-scoped operation shape (createClient for RLS, auth check, .eq("user_id", user.id) guard) -->
 ```ts
 export async function deleteOwnAscent(ascentId: string) {
   const supabase = await createClient();

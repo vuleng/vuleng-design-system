@@ -36,6 +36,7 @@ Playbook for AI agents and humans building Vulkan Engineering applications with 
 
 ## Project Structure
 
+<!-- example: substitute your own routes, actions, and components — the route-group / actions / lib / __tests__ shape is the canonical skeleton -->
 ```
 src/
   app/
@@ -166,6 +167,7 @@ Server components are the default. Add `"use client"` only when you need browser
 
 Use for: pages, layouts, data fetching, static content.
 
+<!-- example: substitute your own page name and queries -->
 ```tsx
 // src/app/(app)/locations/page.tsx -- server component (no directive needed)
 import { redirect } from "next/navigation";
@@ -194,6 +196,7 @@ export default async function LocationsPage() {
 
 Use for: forms, modals, search, toggles, keyboard listeners, anything with `useState`/`useEffect`.
 
+<!-- example: substitute your own client component (the `"use client"` directive + dynamic import for heavy children is the canonical shape) -->
 ```tsx
 // src/app/(app)/locations/locations-client.tsx
 "use client";
@@ -247,6 +250,7 @@ export default function LocationsClient({ locations }: { locations: EnrichedLoca
 
 The standard pattern for interactive pages: a server component page fetches data, then hands it to a client component for interactivity.
 
+<!-- pattern: required server-page → client-component split for any interactive page -->
 ```
 page.tsx (server)  -->  fetches data, auth check
   |
@@ -262,6 +266,7 @@ some-client.tsx ("use client")  -->  search, filters, modals, etc.
 
 Every route segment with async data should have a `loading.tsx`. Next.js wraps the page in a `<Suspense>` boundary using this file as the fallback.
 
+<!-- example: substitute your own root-loading visual; the file location and named-export shape are canonical -->
 ```tsx
 // src/app/(app)/loading.tsx -- root loading for the app group
 export default function AppLoading() {
@@ -275,6 +280,7 @@ export default function AppLoading() {
 
 For nested routes, re-export the parent loading if the skeleton is the same:
 
+<!-- pattern: required parent-loading re-export shape (`export { default } from ...`) -->
 ```tsx
 // src/app/(app)/locations/[id]/loading.tsx
 export { default } from "../../loading";
@@ -284,6 +290,7 @@ export { default } from "../../loading";
 
 When you know the page structure, use `.skeleton` classes instead of spinners:
 
+<!-- example: substitute your own page skeleton — the .skeleton / .skeleton-text / .skeleton-heading classes are canonical -->
 ```tsx
 export default function LocationDetailLoading() {
   return (
@@ -304,6 +311,7 @@ export default function LocationDetailLoading() {
 
 Defer loading of components that aren't needed on first paint (maps, search modals, session modals):
 
+<!-- pattern: required dynamic-import shape (`dynamic(() => import(...), { ssr: false })`) for client-only heavy components -->
 ```tsx
 // In nav.tsx -- these render only when opened
 const GlobalSearch = dynamic(() => import("@/components/global-search"), { ssr: false });
@@ -338,6 +346,7 @@ const LocationMap = dynamic(() => import("@/components/location-map"), { ssr: fa
 
 ### useT() hook in client components
 
+<!-- pattern: required useT() import path and call shape -->
 ```tsx
 "use client";
 
@@ -359,6 +368,7 @@ export default function LocationCard({ name, routeCount }: Props) {
 
 Server components can't use hooks. Use the `<T>` client component for translated strings:
 
+<!-- pattern: required <T k="..." /> usage inside server components -->
 ```tsx
 // In a server component or a component rendered inside one
 import { T } from "@/lib/i18n/t-component";
@@ -376,6 +386,7 @@ export default function StatsSection() {
 
 Keys use hierarchical dots. Both files must stay in sync.
 
+<!-- example: substitute your own keys; hierarchical-dot key style and dual-file structure are canonical -->
 ```json
 // src/lib/i18n/translations/nb.json
 {
@@ -392,6 +403,7 @@ Keys use hierarchical dots. Both files must stay in sync.
 }
 ```
 
+<!-- example: substitute your own English translations matching the nb.json keys -->
 ```json
 // src/lib/i18n/translations/en.json
 {
@@ -410,6 +422,7 @@ Keys use hierarchical dots. Both files must stay in sync.
 
 ### Interpolation
 
+<!-- pattern: required t() interpolation syntax (second-arg object with named tokens matching `{name}` in the value) -->
 ```ts
 t("locations.routeCount", { count: 42 })  // "42 ruter" (nb) / "42 routes" (en)
 ```
@@ -427,6 +440,7 @@ t("locations.routeCount", { count: 42 })  // "42 ruter" (nb) / "42 routes" (en)
 
 ### Route-level error.tsx
 
+<!-- pattern: required error.tsx structure ("use client", { error, reset } props, retry button calling reset()) -->
 ```tsx
 // src/app/(app)/error.tsx
 "use client";

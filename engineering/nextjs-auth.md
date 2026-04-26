@@ -32,6 +32,7 @@ Auth uses a three-layer pattern: middleware for fast JWT checks, a cached helper
 
 ## Layer 1: Middleware -- fast JWT validation
 
+<!-- pattern: required middleware shape — must use getClaims() (local JWT, ~0ms) instead of getUser() (API call, ~200ms) -->
 ```ts
 // src/lib/supabase/middleware.ts
 import { createServerClient } from "@supabase/ssr";
@@ -86,6 +87,7 @@ export async function updateSession(request: NextRequest) {
 }
 ```
 
+<!-- pattern: required edge middleware entry (filename, export name, matcher excludes) -->
 ```ts
 // src/middleware.ts -- edge middleware entry
 import { type NextRequest } from "next/server";
@@ -106,6 +108,7 @@ export const config = {
 
 ## Layer 2: Layout -- React.cache() wrapped auth
 
+<!-- pattern: required getCurrentUserWithProfile + requireApprovedRole signatures (React.cache, AuthorizationError, role gate) -->
 ```ts
 // src/lib/auth/access.ts
 import { cache } from "react";
@@ -152,6 +155,7 @@ export async function requireApprovedRole(...roles: UserRole[]) {
 
 ## Layer 3: Layout consumes the cached auth
 
+<!-- example: substitute your own layout structure and styling -->
 ```tsx
 // src/app/(app)/layout.tsx
 import { redirect } from "next/navigation";
@@ -176,6 +180,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
 
 ## Layer 4: Server action auth helpers
 
+<!-- pattern: required server-action auth helper signatures (requireRole / requireAdmin / requireEditorOrAdmin) -->
 ```ts
 // src/app/actions/auth-helpers.ts
 "use server";

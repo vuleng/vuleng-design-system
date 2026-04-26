@@ -48,6 +48,7 @@ last-verified: 2026-04-26
 
 ### Test Layout
 
+<!-- example: substitute your own test files; the src/__tests__/ structure mirroring src/ is canonical -->
 ```
 src/__tests__/
   actions/
@@ -101,6 +102,7 @@ it("rejects negative grade", () => {
 
 ### Worked Example: Zod Schema Tests
 
+<!-- example: substitute your own schemas and assertions; the describe/it/safeParse + result.success guard is the canonical Zod-test shape -->
 ```ts
 // src/__tests__/actions/action-schemas.test.ts
 import { describe, expect, it } from "vitest";
@@ -145,6 +147,7 @@ describe("RouteCreateSchema", () => {
 
 ## Testing Components with RTL and userEvent
 
+<!-- example: substitute your own component and behaviors; the render/userEvent/screen + getByRole/getByText queries are the canonical RTL shape -->
 ```tsx
 // src/__tests__/components/confirm-modal.test.tsx
 import { describe, it, expect, vi, beforeEach } from "vitest";
@@ -193,6 +196,7 @@ describe("ConfirmModal", () => {
 
 ## Mocking Supabase
 
+<!-- pattern: required Supabase mock shape (mock the boundary `@/lib/supabase/server` factory; chain mockReturnThis on .from().select().eq() builder methods; mockResolvedValue on terminals like .single()) -->
 ```ts
 vi.mock("@/lib/supabase/server", () => ({
   createClient: vi.fn(() => ({

@@ -36,6 +36,7 @@ last-verified: 2026-04-26
 
 Define schemas centrally, import in both actions and tests.
 
+<!-- example: substitute your own field schemas (the RequiredText/NullableText/NullablePositiveInt helpers are reusable preprocess wrappers) -->
 ```ts
 // src/lib/validation/mutations.ts
 import { z } from "zod";
@@ -77,6 +78,7 @@ export const IdSchema = z.string().uuid();
 
 ### ErrorAlert for error display
 
+<!-- pattern: required ErrorAlert component shape (role="alert", red token classes, both light and dark variants) -->
 ```tsx
 // src/components/ui/error-alert.tsx
 export function ErrorAlert({ error }: { error: string }) {
@@ -94,12 +96,14 @@ export function ErrorAlert({ error }: { error: string }) {
 
 Usage in a form:
 
+<!-- pattern: required ErrorAlert conditional-render shape -->
 ```tsx
 {error && <ErrorAlert error={error} />}
 ```
 
 ### Optimistic updates for toggles
 
+<!-- pattern: required optimistic-update flow (flip → server action → revert on failure) -->
 ```tsx
 "use client";
 
@@ -133,6 +137,7 @@ export default function FavoriteToggle({ entityType, entityId, isFavorite }: Pro
 
 ### Button loading state
 
+<!-- pattern: required submit-button loading shape (Spinner + i18n keys + disabled) -->
 ```tsx
 <button
   type="submit"
@@ -152,6 +157,7 @@ All modals follow the same structural pattern.
 
 ### Complete modal example
 
+<!-- pattern: required modal structure (role="dialog" / aria-modal, Escape close, backdrop click, focus management, .card-floating panel) -->
 ```tsx
 "use client";
 
@@ -246,6 +252,7 @@ export default function ConfirmModal({
 
 ### Architecture
 
+<!-- example: substitute your own component tree and result categories -->
 ```
 Nav ("use client")
   |-- GlobalSearch (lazy via next/dynamic, ssr: false)
@@ -258,6 +265,7 @@ Nav ("use client")
 
 ### Key implementation details
 
+<!-- example: substitute your own search-result categories; the debounce/keyboard-nav/portal structure is the canonical command-palette skeleton -->
 ```tsx
 "use client";
 
@@ -337,6 +345,7 @@ export default function GlobalSearch({ open, onClose }: { open: boolean; onClose
 
 ### Opening from Nav
 
+<!-- pattern: required Cmd/Ctrl+K global keyboard hook + dynamic-import lazy load -->
 ```tsx
 // In nav.tsx
 const [searchOpen, setSearchOpen] = useState(false);
