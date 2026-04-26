@@ -19,6 +19,7 @@ Not every project needs a database, and not every website needs a framework.
 
 ## Decision Tree
 
+<!-- example: stack decision tree (illustrative diagram) -->
 ```
 Do you need user authentication?
 ├── YES → Do you need a database with user data?

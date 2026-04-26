@@ -18,6 +18,7 @@ last-verified: 2026-04-25
 
 Load Lato (Vulkan default) via Google Fonts:
 
+<!-- example: swap font for client themes that use a different family -->
 ```html
 <link
   href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap"

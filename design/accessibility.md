@@ -23,12 +23,14 @@ last-verified: 2026-04-25
 
 All focusable elements must show a visible focus indicator. Use this pattern:
 
+<!-- pattern: required focus-ring utility classes -->
 ```html
 focus:ring-2 focus:ring-vulkan-orange focus:outline-none
 ```
 
 For inputs, also add an orange glow:
 
+<!-- example: input-field focus glow (already in preset) -->
 ```css
 .input-field:focus {
   box-shadow: 0 0 0 3px rgba(255, 137, 53, 0.2);
@@ -56,6 +58,7 @@ Use the right elements before reaching for ARIA:
 
 ### Dialogs / Modals
 
+<!-- pattern: required dialog ARIA attributes -->
 ```html
 <div role="dialog" aria-modal="true" aria-labelledby="modal-title">
   <h2 id="modal-title">Confirm Action</h2>
@@ -65,6 +68,7 @@ Use the right elements before reaching for ARIA:
 
 ### Alerts / Toasts
 
+<!-- pattern: required role="alert" for live announcements -->
 ```html
 <div role="alert">
   <p><strong>Error:</strong> Something went wrong.</p>
@@ -75,6 +79,7 @@ Use the right elements before reaching for ARIA:
 
 ### Form Validation
 
+<!-- pattern: required aria-invalid + aria-describedby + role="alert" wiring -->
 ```html
 <input
   type="email"
@@ -89,12 +94,14 @@ Use the right elements before reaching for ARIA:
 
 ### Progress Bars
 
+<!-- pattern: required progressbar ARIA attributes -->
 ```html
 <div role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100">
 ```
 
 ### Status Badges
 
+<!-- example: substitute your own status label -->
 ```html
 <span role="status" class="badge bg-green-100 text-green-800">Active</span>
 ```
@@ -103,6 +110,7 @@ Use the right elements before reaching for ARIA:
 
 Every button, link, and interactive element without visible text needs `aria-label`:
 
+<!-- example: substitute your own button labels -->
 ```html
 <button aria-label="Close dialog" class="p-2">✕</button>
 <button aria-label="Toggle sidebar menu" class="md:hidden">☰</button>
@@ -166,6 +174,7 @@ The primary button uses a slightly darkened orange (`rgba(224, 117, 32, 0.95)`) 
 - Informative images: Descriptive alt text.
 - SVG icons: Use `aria-hidden="true"` if accompanied by text, or `role="img" aria-label="..."` if standalone.
 
+<!-- pattern: required icon ARIA — aria-hidden on SVG, aria-label on icon-only buttons -->
 ```html
 <!-- Icon with text — hide icon from screen readers -->
 <button>
@@ -183,6 +192,7 @@ The primary button uses a slightly darkened orange (`rgba(224, 117, 32, 0.95)`) 
 
 Set the document language to match the active locale:
 
+<!-- pattern: required lang attribute on <html> -->
 ```html
 <html lang="no">  <!-- Norwegian -->
 <html lang="en">  <!-- English -->
@@ -194,6 +204,7 @@ If using vue-i18n or similar, update `document.documentElement.lang` when the la
 
 Consider users who prefer reduced motion:
 
+<!-- example: motion-reduce on a transition -->
 ```html
 <!-- Tailwind way -->
 <div class="transition-all motion-reduce:transition-none">
@@ -201,6 +212,7 @@ Consider users who prefer reduced motion:
 
 Or in CSS:
 
+<!-- example: global prefers-reduced-motion override -->
 ```css
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

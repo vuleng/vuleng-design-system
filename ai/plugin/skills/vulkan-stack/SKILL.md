@@ -49,6 +49,7 @@ When generating code:
 ## Common Patterns
 
 ### Server action with Zod
+<!-- pattern: required server-action return-shape `{ ok: true, data } | { ok: false, error }` and Zod-validate-first structure -->
 ```ts
 "use server";
 import { z } from "zod";
@@ -73,6 +74,7 @@ export async function createRoute(formData: FormData) {
 ```
 
 ### Nested select
+<!-- example: substitute your own tables and join shape -->
 ```ts
 const { data } = await supabase
   .from("ascents")
@@ -89,6 +91,7 @@ const { data } = await supabase
 ```
 
 ### Parallel independent queries
+<!-- example: substitute your own tables -->
 ```ts
 const [{ data: locations }, { data: sectors }, { data: routes }] = await Promise.all([
   supabase.from("locations").select("id, name"),
@@ -98,6 +101,7 @@ const [{ data: locations }, { data: sectors }, { data: routes }] = await Promise
 ```
 
 ### Effective role check
+<!-- pattern: required view-as-role contract — getEffectiveRole() server-side -->
 ```ts
 import { getEffectiveRole } from "@/lib/auth/view-as-role-server";
 

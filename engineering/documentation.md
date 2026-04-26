@@ -65,6 +65,7 @@ Every project must have a `CLAUDE.md` at the root. It should contain:
 
 Example mapping table:
 
+<!-- example: substitute your own rows for the projects you maintain -->
 ```markdown
 | If you are working on... | Read... |
 |--------------------------|---------|

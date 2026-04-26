@@ -24,6 +24,7 @@ These are general principles — not all apps need Supabase. See `stack-guide.md
 | `createClient()` | Server components, server actions that need user context | Enforced | Yes |
 | `createAdminClient()` | Server actions that bypass RLS, cached queries | Bypassed | No |
 
+<!-- pattern: required createClient() server-side signature -->
 ```ts
 // src/lib/supabase/server.ts — user-aware, respects RLS
 import { createServerClient } from "@supabase/ssr";
@@ -39,6 +40,7 @@ export async function createClient() {
 }
 ```
 
+<!-- pattern: required createAdminClient() service-role signature -->
 ```ts
 // src/lib/supabase/admin.ts — service role, no RLS
 import { createClient } from "@supabase/supabase-js";
@@ -63,6 +65,7 @@ need to bypass RLS (admin operations, cached queries that serve all users).
 Validates JWT signature locally against the project's public keys (~0ms).
 Suitable for route protection — checking if a user is logged in.
 
+<!-- pattern: required middleware uses getClaims (local JWT) not getUser (API call) -->
 ```ts
 const { data: { claims } } = await supabase.auth.getClaims();
 const user = claims?.sub ? { id: claims.sub } : null;
@@ -77,6 +80,7 @@ if (!user && !isPublicRoute) {
 Verifies the token against Supabase Auth servers (~50-80ms in same region).
 Use for actual user data access. Wrap in `React.cache()` to run once per request.
 
+<!-- pattern: required getCurrentUserWithProfile() signature, React.cache-wrapped -->
 ```ts
 import { cache } from "react";
 
@@ -98,6 +102,7 @@ export const getCurrentUserWithProfile = cache(async () => {
 Server actions run as separate API calls — they don't share the React.cache()
 scope with page renders. They must verify auth independently.
 
+<!-- example: substitute your own action and entity -->
 ```ts
 export async function deleteOrder(id: string) {
   const supabase = await createClient();
@@ -111,6 +116,7 @@ export async function deleteOrder(id: string) {
 
 Centralize role checks in a shared file:
 
+<!-- pattern: required requireAdmin() auth-helper signature -->
 ```ts
 // src/app/actions/auth-helpers.ts
 export async function requireAdmin() {
@@ -134,6 +140,7 @@ export async function requireAdmin() {
 
 Supabase supports joining related tables in a single query:
 
+<!-- example: substitute your own tables and join shape -->
 ```ts
 // One query instead of three:
 const { data } = await supabase
@@ -147,6 +154,7 @@ const { data } = await supabase
 **Important:** Supabase can return joined data as array or object depending on
 the relationship. Use a helper to safely unwrap:
 
+<!-- example: substitute your own joined relation -->
 ```ts
 const category = Array.isArray(product.category) ? product.category[0] : product.category;
 ```
@@ -155,6 +163,7 @@ const category = Array.isArray(product.category) ? product.category[0] : product
 
 Always parallelize independent queries:
 
+<!-- example: substitute your own tables -->
 ```ts
 const [{ data: vendors }, { data: categories }, { data: products }] = await Promise.all([
   supabase.from("vendors").select("id, name").order("name"),
@@ -167,6 +176,7 @@ const [{ data: vendors }, { data: categories }, { data: products }] = await Prom
 
 On list pages, fetch only what the UI renders:
 
+<!-- example: substitute your own table and column list -->
 ```ts
 // List page — only card fields
 supabase.from("vendors").select("id, name, type, region")
@@ -177,6 +187,7 @@ supabase.from("vendors").select("*").eq("id", id).single()
 
 ### Avoid N+1 Loops
 
+<!-- example: substitute your own table and field -->
 ```ts
 // BAD: N queries in a loop
 for (const date of dates) {
@@ -194,6 +205,7 @@ const { data } = await supabase
 
 Use `unstable_cache` with admin client for data all users see:
 
+<!-- example: substitute your own table and cache key -->
 ```ts
 import { unstable_cache } from "next/cache";
 import { createAdminClient } from "@/lib/supabase/admin";
@@ -220,6 +232,7 @@ Don't return `Set`, `Map`, or `Date` objects — they'll become `{}` or strings.
 
 ### Tag Convention
 
+<!-- example: substitute your own tag names -->
 ```ts
 export const CacheTags = {
   vendors: "vendors",
@@ -230,6 +243,7 @@ export const CacheTags = {
 
 ### Invalidation in Server Actions
 
+<!-- example: substitute your own action and tag -->
 ```ts
 import { revalidateTag } from "next/cache";
 
@@ -245,6 +259,7 @@ export async function createVendor(data) {
 
 Enable RLS on all tables. Define policies that restrict access by user:
 
+<!-- pattern: required RLS policy structure (FOR <verb>, USING/WITH CHECK clauses) -->
 ```sql
 -- Users can only read their own orders
 CREATE POLICY "Users can read own orders"
@@ -266,6 +281,7 @@ Admin operations use `createAdminClient()` which bypasses RLS entirely.
 
 ## Environment Variables
 
+<!-- pattern: required Supabase env var names -->
 ```env
 NEXT_PUBLIC_SUPABASE_URL=https://xxxxx.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGci...          # Public, safe for client
@@ -281,12 +297,14 @@ SUPABASE_SERVICE_ROLE_KEY=eyJhbGci...               # Secret, server-only
 
 Generate TypeScript types from your Supabase schema:
 
+<!-- example: substitute your own project ID -->
 ```bash
 npx supabase gen types typescript --project-id YOUR_PROJECT_ID > src/types/database.ts
 ```
 
 Or maintain types manually for more control:
 
+<!-- example: substitute your own table types -->
 ```ts
 // src/types/database.ts
 export interface Project {

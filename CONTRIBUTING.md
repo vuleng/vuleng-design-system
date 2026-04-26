@@ -90,6 +90,67 @@ Every design file ends with an `## Anti-Patterns` section listing things to NOT 
 
 Files over ~400 lines should be split. The Next.js playbook is now split across `nextjs.md` (overview), `nextjs-auth.md`, `nextjs-data.md`, and `nextjs-forms.md` — each within or near the cap. The rump `nextjs.md` runs slightly over (~520 lines) because the project-structure tree it leads with is high-value orientation; that's acceptable for an overview file dominated by code blocks.
 
+## Example vs Pattern Convention
+
+Every fenced code block in `design/`, `engineering/`, `fragments/`, and `ai/plugin/skills/*/SKILL.md` is annotated with an HTML comment immediately above it that tells AI tools (and humans) whether the block is illustrative or prescriptive. This stops AI from copying domain-specific examples literally into unrelated projects.
+
+### The two markers
+
+**`<!-- example: ... -->`** — illustrative code. The reader is expected to substitute domain-specific names (tables, routes, components, copy). Adapt structure freely.
+
+```md
+<!-- example: substitute your own domain -->
+```ts
+// illustrative code with placeholder names
+```
+```
+
+**`<!-- pattern: ... -->`** — required structure. The shape, signatures, return types, or token names MUST be followed verbatim. Substitution is limited to the parts the comment specifies.
+
+```md
+<!-- pattern: required structure -->
+```ts
+// canonical pattern
+```
+```
+
+### Heading prefix
+
+Sections that consist primarily of demonstrative code (not required APIs) prefix the heading with `Example —`:
+
+```md
+## Example — Server action with Zod
+```
+
+This signal is reserved for sections where the heading itself could be misread as prescribing an API. Don't add it to sections that define required contracts.
+
+### Decision rules
+
+Use `<!-- pattern: -->` for:
+- Server-action return-shape `{ ok: true, data } | { ok: false, error }`
+- Auth middleware structure (must call `getClaims()`, not `getUser()`)
+- View-as-role contract (`getEffectiveRole()` server, `useViewAsRole()` client)
+- RLS policy structure (specific clause ordering)
+- Theme override structure (which CSS vars must be defined)
+- Standard requirements scaffolding (i18n, dark mode, testing setup)
+- Dark-mode toggle / boot script
+- Canonical install / import commands and required env var names
+- Auth helper signatures (`requireRole`, `requireAdmin`, `getCurrentUserWithProfile`)
+
+Use `<!-- example: -->` for:
+- Anything with a domain-specific table, route, or component name
+- Demonstrative code where the user will substitute their own data
+- Specific UI snippets (button HTML, card layouts) where the user will adapt structure
+- SQL queries against named tables
+- Specific i18n keys
+- Project-layout trees from a real Vulkan app
+
+**When in doubt, prefer `<!-- example: -->`.** A misclassified pattern locks readers into a shape that wasn't actually required; a misclassified example just gives them more freedom than necessary.
+
+### Why
+
+The Claude Code plugin in `ai/plugin/` loads these docs as context for AI assistants. Without these markers, AI tools sometimes treat domain-specific examples (climbing-app tables, specific route names) as prescriptive patterns and copy them literally into unrelated projects. The markers give AI a clear signal about which parts to generalize and which to follow verbatim.
+
 ## Theme-Adding Workflow
 
 To add a new client theme `contoso`:

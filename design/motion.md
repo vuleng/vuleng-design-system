@@ -53,6 +53,7 @@ Use these durations consistently across all projects:
 
 All Vulkan buttons (primary, secondary, navy, danger) use a **lift effect** — the button moves up 1px and the shadow deepens. This is built into the preset classes.
 
+<!-- example: reference of preset behavior, no extra CSS to write -->
 ```css
 /* Already in preset.js — no extra CSS needed */
 .btn-primary {
@@ -74,6 +75,7 @@ The lift effect is consistent across `.btn-primary`, `.btn-secondary`, `.btn-dan
 
 ### Card Hover
 
+<!-- example: card hover utilities -->
 ```html
 <div class="card p-6 transition-all duration-200 hover:border-vulkan-orange hover:shadow-md">
 ```
@@ -82,6 +84,7 @@ Border highlights to orange + subtle shadow. `200ms ease`.
 
 ### Sidebar Slide (Mobile)
 
+<!-- example: bind to your own isOpen state -->
 ```html
 <aside class="fixed inset-y-0 left-0 w-72 transform -translate-x-full transition-transform duration-300 ease-in-out"
        :class="{ 'translate-x-0': isOpen }">
@@ -93,6 +96,7 @@ Slides from left. `300ms ease-in-out`.
 
 Using Vue `<Transition>`:
 
+<!-- example: dropdown enter/leave classes -->
 ```css
 .dropdown-enter-active { transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1); }
 .dropdown-leave-active { transition: all 0.15s ease-in; }
@@ -107,6 +111,7 @@ Scale + fade with overshoot easing on enter, fast fade out on leave.
 
 ### Toast Entry
 
+<!-- example: toast keyframe animation -->
 ```css
 @keyframes fade-in {
   from { opacity: 0; transform: translateY(-10px); }
@@ -122,6 +127,7 @@ Slides down from top corner and fades in.
 
 ### Progress Bar Fill
 
+<!-- example: bind to your own progress value -->
 ```html
 <div class="h-full bg-vulkan-orange rounded-full transition-all duration-700 ease-out"
      :style="{ width: progress + '%' }">
@@ -132,6 +138,7 @@ Width animates over `700ms` with deceleration — feels like the bar is "settlin
 
 ### Chevron / Expand Toggle
 
+<!-- example: bind to your own isExpanded state -->
 ```html
 <svg class="w-4 h-4 transition-transform duration-200"
      :class="{ 'rotate-180': isExpanded }">
@@ -143,6 +150,7 @@ Simple 180° rotation at `200ms`.
 
 Inputs and selects use a **double-ring glow** for focus — an inner solid ring and an outer diffused ring, both in brand orange:
 
+<!-- example: reference of preset behavior, no extra CSS to write -->
 ```css
 /* Already in preset.js */
 .input-field:focus {
@@ -178,12 +186,14 @@ The preset includes a global `prefers-reduced-motion` media query that disables 
 
 For elements where you add custom animations outside the preset, use Tailwind's `motion-reduce:` prefix:
 
+<!-- example: motion-reduce for custom transitions -->
 ```html
 <div class="transition-all motion-reduce:transition-none">
 ```
 
 Or scope your keyframe animation:
 
+<!-- example: motion-reduce for keyframe animations -->
 ```html
 <div class="animate-spin motion-reduce:animate-none">
 ```

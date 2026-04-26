@@ -24,6 +24,7 @@ All classes are provided by `@vuleng/design-system`. Use them directly — no ex
 
 The main call-to-action. Orange with glass effect.
 
+<!-- example: substitute your own button label and icon -->
 ```html
 <button class="btn-primary">
   <svg class="w-5 h-5" ...><!-- icon --></svg>
@@ -45,6 +46,7 @@ The main call-to-action. Orange with glass effect.
 
 Supporting action. Glass-white surface with a subtle border.
 
+<!-- example: substitute your own button label -->
 ```html
 <button class="btn-secondary">Cancel</button>
 ```
@@ -61,6 +63,7 @@ Supporting action. Glass-white surface with a subtle border.
 
 Text-only with no background. Subtle fill on hover.
 
+<!-- example: substitute your own button label -->
 ```html
 <button class="btn-ghost">View details</button>
 ```
@@ -71,6 +74,7 @@ Text-only with no background. Subtle fill on hover.
 
 Red-tinted glass for destructive actions.
 
+<!-- example: substitute your own button label and icon -->
 ```html
 <button class="btn-danger">
   <svg class="w-5 h-5" ...><!-- trash icon --></svg>
@@ -94,6 +98,7 @@ Override the default padding as needed:
 
 Always pair an SVG icon with text. Icon on the left, `w-5 h-5`, inherits `currentColor`.
 
+<!-- example: substitute your own icon path and label -->
 ```html
 <button class="btn-primary">
   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -111,6 +116,7 @@ Always pair an SVG icon with text. Icon on the left, `w-5 h-5`, inherits `curren
 
 The `.card` class provides the base. Add padding and content as needed.
 
+<!-- example: substitute your own card content -->
 ```html
 <div class="card p-6">
   <h3 class="text-lg font-bold text-vulkan-navy dark:text-gray-100 mb-2">Card Title</h3>
@@ -130,12 +136,14 @@ The `.card` class provides the base. Add padding and content as needed.
 
 For clickable cards, add hover state:
 
+<!-- example: clickable card hover -->
 ```html
 <div class="card p-6 hover:border-vulkan-orange hover:shadow-md transition-all cursor-pointer">
 ```
 
 ### Card with Status Indicator
 
+<!-- example: pick your own status color -->
 ```html
 <div class="card p-6 border-l-4 border-l-green-500">
   <!-- Content with left status border -->
@@ -148,6 +156,7 @@ For clickable cards, add hover state:
 
 Use the `.input-field` class for all form inputs.
 
+<!-- example: substitute your own field name and placeholder -->
 ```html
 <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">
   Email
@@ -165,6 +174,7 @@ Use the `.input-field` class for all form inputs.
 
 ### Input with Error
 
+<!-- example: substitute your own field name and error message -->
 ```html
 <input type="email" class="input-field border-red-500 focus:ring-red-500" aria-invalid="true" aria-describedby="email-error" />
 <p id="email-error" class="mt-1 text-sm text-red-600" role="alert">Invalid email format</p>
@@ -174,6 +184,7 @@ Use the `.input-field` class for all form inputs.
 
 Show the unit after the label:
 
+<!-- example: substitute your own field name and unit -->
 ```html
 <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">
   Temperature (°C)
@@ -183,6 +194,7 @@ Show the unit after the label:
 
 ### Textarea
 
+<!-- example: substitute your own placeholder -->
 ```html
 <textarea class="input-field resize-y" rows="4" placeholder="Describe the issue..."></textarea>
 ```
@@ -193,6 +205,7 @@ Show the unit after the label:
 
 Full-screen overlay with centered content panel.
 
+<!-- example: substitute your own modal content -->
 ```html
 <div class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50"
      role="dialog" aria-modal="true">
@@ -222,6 +235,7 @@ Full-screen overlay with centered content panel.
 
 Fixed-position notification with type-based styling.
 
+<!-- example: substitute your own toast message and type -->
 ```html
 <div class="fixed top-4 right-4 z-50">
   <div class="px-6 py-4 rounded-lg shadow-xl border-l-4 border-green-500 bg-green-50 dark:bg-green-900/30 text-green-900 dark:text-green-200 flex items-center gap-3 max-w-md"
@@ -253,6 +267,7 @@ Fixed-position notification with type-based styling.
 
 Small status indicators. Use the `.badge` base class and add type-specific styles.
 
+<!-- example: substitute your own badge labels -->
 ```html
 <span class="badge bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300">Active</span>
 <span class="badge bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300">Critical</span>
@@ -277,6 +292,7 @@ Define these in your project's CSS if they match your domain:
 
 For action-type badges (like in OpsNav), use full-round with bold text:
 
+<!-- example: substitute your own pill label -->
 ```html
 <span class="inline-flex items-center px-4 py-1.5 rounded-full text-xs font-black text-white bg-vulkan-orange uppercase tracking-wide shadow-sm">
   SET
@@ -289,6 +305,7 @@ For action-type badges (like in OpsNav), use full-round with bold text:
 
 Fixed top bar with logo, title, and action area.
 
+<!-- example: substitute your own brand name and title -->
 ```html
 <header class="h-14 bg-white dark:bg-dark-surface border-b border-gray-200 dark:border-gray-700 flex items-center px-4 shadow-sm z-30">
   <!-- Left: Logo -->
@@ -321,6 +338,7 @@ Fixed top bar with logo, title, and action area.
 
 Small avatar circle with initials:
 
+<!-- example: substitute your own user initials -->
 ```html
 <div class="w-7 h-7 rounded-full bg-vulkan-navy/10 dark:bg-gray-700 flex items-center justify-center text-vulkan-navy dark:text-gray-300 font-bold text-xs">
   EH
@@ -345,6 +363,7 @@ Collapsible navigation panel for apps with multi-page or multi-section structure
 
 ### Sidebar Nav Item
 
+<!-- example: substitute your own page name -->
 ```html
 <button class="w-full text-left px-4 py-2 rounded-lg text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-dark-card transition-colors">
   Page Name
@@ -362,6 +381,7 @@ Collapsible navigation panel for apps with multi-page or multi-section structure
 
 A dropdown menu triggered by a gear icon, containing app-level settings (language, dark mode, auth).
 
+<!-- example: substitute your own settings rows and danger items -->
 ```html
 <div class="relative">
   <!-- Toggle: gear icon, rotates 90° when open -->
@@ -407,6 +427,7 @@ A dropdown menu triggered by a gear icon, containing app-level settings (languag
 
 Horizontal bar showing completion percentage.
 
+<!-- example: bind to your own progress value -->
 ```html
 <div class="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
   <div class="h-full bg-vulkan-orange rounded-full transition-all duration-700 ease-out"
@@ -425,6 +446,7 @@ Horizontal bar showing completion percentage.
 
 Full-screen or inline loading indicator.
 
+<!-- example: substitute your own loading message -->
 ```html
 <!-- Full-screen overlay -->
 <div class="fixed inset-0 bg-black/30 flex items-center justify-center z-50">
@@ -444,6 +466,7 @@ Full-screen or inline loading indicator.
 
 For data-heavy views:
 
+<!-- example: substitute your own table columns and rows -->
 ```html
 <div class="card overflow-hidden">
   <table class="w-full text-sm">
@@ -479,6 +502,7 @@ Use skeleton placeholders to indicate loading state instead of spinners when the
 
 ### Card Skeleton
 
+<!-- example: tune skeleton row count and widths to your card -->
 ```html
 <div class="card p-6 space-y-4">
   <div class="skeleton skeleton-heading"></div>
@@ -490,6 +514,7 @@ Use skeleton placeholders to indicate loading state instead of spinners when the
 
 ### List Skeleton
 
+<!-- example: tune skeleton item count for your list -->
 ```html
 <div class="space-y-3">
   <div class="flex items-center gap-3" v-for="i in 4" :key="i">
@@ -504,6 +529,7 @@ Use skeleton placeholders to indicate loading state instead of spinners when the
 
 ### Table Skeleton
 
+<!-- example: tune skeleton row count for your table -->
 ```html
 <div class="card overflow-hidden">
   <div class="p-4 space-y-3">
@@ -523,6 +549,7 @@ Use skeleton placeholders to indicate loading state instead of spinners when the
 
 When a list, table, or section has no data, show a structured empty state instead of blank space.
 
+<!-- example: substitute your own icon, heading, description, and CTA -->
 ```html
 <div class="flex flex-col items-center justify-center py-16 px-6 text-center">
   <!-- Icon — use a relevant Heroicon, muted color -->
@@ -560,6 +587,7 @@ When a list, table, or section has no data, show a structured empty state instea
 
 When a data fetch or operation fails, show a clear error state with a retry action.
 
+<!-- example: substitute your own error message and retry handler -->
 ```html
 <div class="flex flex-col items-center justify-center py-12 px-6 text-center">
   <div class="w-12 h-12 rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center mb-4">
@@ -593,6 +621,7 @@ When a data fetch or operation fails, show a clear error state with a retry acti
 
 When a button triggers an async action, show a spinner and disable interaction.
 
+<!-- example: substitute your own button label and loading message -->
 ```html
 <!-- Loading state -->
 <button class="btn-primary" disabled>
@@ -617,6 +646,7 @@ When a button triggers an async action, show a spinner and disable interaction.
 
 ### Full form submit pattern
 
+<!-- example: substitute your own form fields and handler name -->
 ```html
 <form @submit.prevent="handleSubmit">
   <!-- form fields -->
@@ -647,6 +677,7 @@ Cards and surfaces use three elevation levels. Use the lowest level that provide
 | Raised | `.card-raised` | `elevation-2` | Hovered cards, active selections, floating panels |
 | Floating | `.card-floating` | `elevation-3` | Modals, dropdowns, popovers, toasts |
 
+<!-- example: substitute your own card content -->
 ```html
 <!-- Resting -->
 <div class="card p-6">Default card</div>
@@ -664,6 +695,7 @@ Cards and surfaces use three elevation levels. Use the lowest level that provide
 
 When a list or section has no data:
 
+<!-- example: substitute your own empty-state message and CTA -->
 ```html
 <div class="flex flex-col items-center justify-center py-16 text-center">
   <div class="text-4xl mb-4">📋</div>

@@ -28,6 +28,7 @@ Two variants, one for each mode:
 - Maximum height in headers: `h-8` (2rem) to `h-10` (2.5rem).
 - Use `object-contain` to preserve proportions.
 
+<!-- example: substitute your own logo paths and brand name -->
 ```html
 <img
   src={isDark ? "/logo_dark.png" : "/logo.png"}
@@ -51,6 +52,7 @@ Professional, industrial, clean. Norwegian-first; English fully supported. Never
 
 **Delivery:** Inline SVG. No icon fonts, no emoji.
 
+<!-- pattern: required Heroicons inline-SVG structure (currentColor, stroke-width 1.5, aria) -->
 ```html
 <svg
   xmlns="http://www.w3.org/2000/svg"
