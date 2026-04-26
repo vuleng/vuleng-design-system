@@ -28,18 +28,21 @@ last-verified: 2026-04-25
 
 ## Install
 
+<!-- pattern: required install command -->
 ```bash
 npm install github:vuleng/vuleng-design-system#v2.0.0
 ```
 
 In your project's main CSS file:
 
+<!-- pattern: required default-theme import -->
 ```css
 @import "@vuleng/design-system";
 ```
 
 This imports both the core preset and the Vulkan brand theme. For client-themed apps:
 
+<!-- pattern: required client-theme override structure -->
 ```css
 @import "@vuleng/design-system/preset";
 @import "./themes/your-client-theme.css";

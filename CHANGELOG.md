@@ -7,6 +7,7 @@ All notable changes to `@vuleng/design-system` (formerly `@vuleng/tailwind-prese
 ### Changed
 - Generified `engineering/supabase.md` examples (orders/products/categories/vendors instead of climbing-app domain) so AI context doesn't leak unrelated terminology into other Vulkan projects.
 - Split `engineering/nextjs.md` (1471 lines) into focused files: `nextjs.md` (overview / project structure / server vs client / loading / file naming / i18n / error boundaries / Supabase client cheat sheet), `nextjs-auth.md` (middleware, `getCurrentUserWithProfile`, `requireRole` helpers), `nextjs-data.md` (server-component fetches, parallel queries, `unstable_cache`, server actions), and `nextjs-forms.md` (Zod forms, modals, Cmd+K search). Concrete RTL/Zod test examples moved into `testing.md`. AI plugins (`vulkan-stack` skill) now load only the per-topic file relevant to the user's question, saving context window space. Removes the v2.x split debt noted in v2.0.0.
+- Apply `<!-- example: -->` and `<!-- pattern: -->` markers to all docs so AI tools distinguish illustrative examples from required patterns. See CONTRIBUTING.md for the convention.
 
 ---
 

@@ -21,6 +21,7 @@ last-verified: 2026-04-26
 
 `package.json` essentials:
 
+<!-- pattern: required test scripts and devDependencies -->
 ```json
 {
   "scripts": {
@@ -67,6 +68,7 @@ src/__tests__/
 
 Workaround: extract the Zod schema and pure logic into a separate file, then test that:
 
+<!-- pattern: required server-action return-shape `{ ok: true, ... } | { ok: false, error }` -->
 ```ts
 // src/app/actions/create-route.ts
 "use server";
@@ -86,6 +88,7 @@ export const createRouteSchema = z.object({ /* ... */ });
 export function validateBusinessRules(data: z.infer<typeof createRouteSchema>) { /* ... */ }
 ```
 
+<!-- example: substitute your own schema and assertion -->
 ```ts
 // src/__tests__/lib/validation/route.test.ts
 import { createRouteSchema, validateBusinessRules } from "@/lib/validation/route";

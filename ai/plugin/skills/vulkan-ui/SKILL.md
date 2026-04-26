@@ -38,11 +38,13 @@ Read these files in order. Skip any that aren't relevant to the user's specific 
 ## Common Patterns
 
 ### Primary CTA
+<!-- example: substitute your own button label -->
 ```html
 <button class="btn-primary">Lagre endringer</button>
 ```
 
 ### Card with hover
+<!-- example: substitute your own card content -->
 ```html
 <div class="card p-6 hover:shadow-elevation-2 transition-shadow">
   <h3 class="text-lg font-bold text-brand-accent dark:text-text-default-dark">Title</h3>
@@ -51,6 +53,7 @@ Read these files in order. Skip any that aren't relevant to the user's specific 
 ```
 
 ### Input with label
+<!-- example: substitute your own field name and placeholder -->
 ```html
 <label class="block">
   <span class="block text-sm font-bold text-text-default mb-1">Name</span>
@@ -59,6 +62,7 @@ Read these files in order. Skip any that aren't relevant to the user's specific 
 ```
 
 ### Status badge
+<!-- example: substitute your own status label -->
 ```html
 <span class="badge bg-green-100 text-green-800 dark:bg-green-900/15 dark:text-green-300">
   Active

@@ -36,6 +36,7 @@ If the site has both: Astro for the public side, Next.js for the app side, on di
 
 ## Project Layout
 
+<!-- example: Astro+Sanity blueprint — adapt to your content model -->
 ```
 src/
 ├── pages/                  # Astro routes

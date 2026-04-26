@@ -20,6 +20,7 @@ last-verified: 2026-04-25
 
 ### 1. Toggle on `<html>`
 
+<!-- pattern: required dark-mode boot script (no-FOUC) -->
 ```ts
 // On boot, before paint, to avoid FOUC:
 const stored = localStorage.getItem("vulkan_dark_mode");
@@ -30,6 +31,7 @@ document.documentElement.classList.toggle("dark", isDark);
 
 ### 2. Toggle handler
 
+<!-- pattern: required dark-mode toggle handler -->
 ```ts
 function toggleDarkMode() {
   const next = !document.documentElement.classList.contains("dark");
@@ -44,6 +46,7 @@ Most components need **no explicit dark-mode CSS**. The preset's component class
 
 For Tailwind utility usage, use the `dark:` modifier:
 
+<!-- example: substitute your own classes/content -->
 ```html
 <div class="bg-surface text-text-default">
   <!-- Auto-flips: tokens are mode-aware -->

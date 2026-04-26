@@ -32,6 +32,7 @@ last-verified: 2026-04-25
 3. Provide both light-mode (in `@theme`) and dark-mode (in `.dark`) values for surfaces, text, and borders.
 4. Import in your app's main CSS:
 
+   <!-- pattern: required client-theme override structure (preset before theme) -->
    ```css
    @import "@vuleng/design-system/preset";
    @import "./themes/contoso.css";
@@ -43,6 +44,7 @@ That's it — every component class (`.btn-primary`, `.card`, etc.) and Tailwind
 
 Every theme **must** define all of the following inside an `@theme` block. Missing any breaks at least one component.
 
+<!-- pattern: required theme token structure — fill in hex/RGB values for your brand -->
 ```css
 @theme {
   /* Brand */
@@ -115,6 +117,7 @@ Every theme **must** define all of the following inside an `@theme` block. Missi
 
 ## Dark Mode Block
 
+<!-- pattern: required dark-mode override block — fill in hex/RGB values for your brand -->
 ```css
 .dark {
   --color-page-bg: <hex>;
@@ -139,6 +142,7 @@ Every theme **must** define all of the following inside an `@theme` block. Missi
 
 Tokens that participate in alpha overlays (`--color-brand-primary-rgb`, `--color-shadow-rgb`, etc.) use the **space-separated RGB triplet** format expected by the modern `rgb()` function:
 
+<!-- pattern: required RGB triplet format (space-separated, unwrapped) -->
 ```css
 --color-brand-primary-rgb: 255 137 53;   /* ✅ correct */
 --color-brand-primary-rgb: 255, 137, 53; /* ❌ wrong (comma-separated) */

@@ -22,6 +22,7 @@ relevant sections into your project's `CLAUDE.md` and `docs/` folder.
 Every Vulkan project should have a `CLAUDE.md` in the root that AI assistants
 read before making changes. Adapt this template to your project:
 
+<!-- example: substitute project name and adapt sections to your domain -->
 ```markdown
 # CLAUDE.md — [Project Name]
 
@@ -73,12 +74,14 @@ CRITICAL: Update docs in the SAME commit as the code change. Never batch.
 ## Supabase Query Patterns
 
 Always use nested selects to avoid waterfall queries:
+<!-- example: substitute your own table and join shape -->
 ```ts
 supabase.from("items")
   .select("*, category:categories(id, name)")
 ```
 
 Always parallelize independent queries:
+<!-- example: substitute your own tables -->
 ```ts
 const [{ data: items }, { data: users }] = await Promise.all([
   supabase.from("items").select("id, name"),
@@ -126,6 +129,7 @@ Every project should have a `docs/` folder with:
 
 ## Environment Variables Template
 
+<!-- pattern: required Supabase + Anthropic env var names -->
 ```env
 # Supabase
 NEXT_PUBLIC_SUPABASE_URL=https://xxxxx.supabase.co
@@ -140,6 +144,7 @@ ANTHROPIC_API_KEY=sk-ant-...
 
 ## Project Directory Structure
 
+<!-- example: directory blueprint — substitute your own project name and routes -->
 ```
 project-name/
 ├── CLAUDE.md                        # AI instructions (this template)
@@ -214,10 +219,12 @@ project-name/
 
 ## Testing Setup
 
+<!-- pattern: required Vitest install command -->
 ```bash
 npm install -D vitest @testing-library/react @testing-library/jest-dom jsdom @testing-library/user-event
 ```
 
+<!-- pattern: required vitest.config.ts shape (jsdom environment, @ alias) -->
 ```ts
 // vitest.config.ts
 import { defineConfig } from "vitest/config";

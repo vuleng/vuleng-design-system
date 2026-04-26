@@ -29,6 +29,7 @@ Link your GitHub repo to Vercel. It auto-detects Next.js and Astro projects.
 
 Create `vercel.json` in the project root:
 
+<!-- example: substitute the region code that matches your database -->
 ```json
 {
   "regions": ["dub1"]
@@ -74,6 +75,7 @@ if you use different Supabase projects per environment.
 - Never push directly to `main`
 - Use feature branches: `feat/my-feature`, `fix/my-bug`
 - Always branch from latest `origin/main`:
+  <!-- example: substitute your own branch name -->
   ```bash
   git fetch origin main && git checkout -b feat/my-feature origin/main
   ```
@@ -103,6 +105,7 @@ Before merging to main:
 3. Vercel auto-provisions SSL certificate
 
 ### Recommended DNS Setup
+<!-- example: substitute your own domain -->
 ```
 example.no        → A record → 76.76.21.21
 www.example.no    → CNAME → cname.vercel-dns.com

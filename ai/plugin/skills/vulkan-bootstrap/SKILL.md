@@ -28,12 +28,14 @@ Ask if not specified:
 - **Static HTML/CSS** — landing page, no logic
 
 ### 2. Repo init
+<!-- example: substitute your own project name -->
 ```bash
 git init
 gh repo create vuleng/<name> --private
 ```
 
 ### 3. Framework scaffold (example: Next.js)
+<!-- example: substitute your own project name; install command set is canonical -->
 ```bash
 npx create-next-app@latest <name> --typescript --app --src-dir --import-alias "@/*" --tailwind=false
 cd <name>
@@ -42,6 +44,7 @@ npm install github:vuleng/vuleng-design-system#v2.0.0
 ```
 
 ### 4. CSS setup
+<!-- pattern: required default-theme import (token block is optional) -->
 ```css
 /* src/app/globals.css */
 @import "@vuleng/design-system";
@@ -53,6 +56,7 @@ npm install github:vuleng/vuleng-design-system#v2.0.0
 ```
 
 For client-themed apps:
+<!-- pattern: required client-theme override structure (preset before theme) -->
 ```css
 @import "@vuleng/design-system/preset";
 @import "./themes/<client>.css";
@@ -61,6 +65,7 @@ For client-themed apps:
 ### 5. CLAUDE.md template
 Create `CLAUDE.md` at project root with:
 
+<!-- example: substitute your own project name and doc rows -->
 ```md
 # <Project Name>
 
@@ -111,6 +116,7 @@ Create `src/lib/i18n.ts` with the `useT()` hook + locale provider.
 
 ### 8. Dark mode boot
 Add to `src/app/layout.tsx`:
+<!-- pattern: required dark-mode boot script (no-FOUC, localStorage key vulkan_dark_mode) -->
 ```tsx
 <script
   dangerouslySetInnerHTML={{
@@ -125,12 +131,14 @@ Add to `src/app/layout.tsx`:
 ```
 
 ### 9. Test setup
+<!-- pattern: required Vitest install command -->
 ```bash
 npm install -D vitest @testing-library/react @testing-library/jest-dom @testing-library/user-event jsdom
 ```
 Add `vitest.config.ts` and `src/__tests__/setup.ts` with `@testing-library/jest-dom` import.
 
 ### 10. First commit
+<!-- example: substitute your own project name -->
 ```bash
 git add -A && git commit -m "Initial Vulkan project scaffold"
 git remote add origin git@github.com:vuleng/<name>.git

@@ -20,6 +20,7 @@ last-verified: 2026-04-25
 
 In Tailwind utilities:
 
+<!-- example: token usage with substitute classes/text -->
 ```html
 <button class="bg-brand-primary text-white">CTA</button>
 <p class="text-text-muted">Secondary</p>
@@ -28,6 +29,7 @@ In Tailwind utilities:
 
 In CSS variables (for arbitrary values, animations, custom shadows):
 
+<!-- example: substitute your own selector and shadow values -->
 ```css
 .my-glow {
   box-shadow: 0 0 12px rgb(var(--color-brand-primary-rgb) / 0.4);

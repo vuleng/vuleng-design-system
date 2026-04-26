@@ -25,6 +25,7 @@ This is the single most impactful performance decision. A region mismatch
 adds ~150ms of network latency per database call. On a page with 5 queries,
 that's 750ms of unnecessary waiting.
 
+<!-- example: substitute the region code that matches your database -->
 ```json
 // vercel.json — match your Supabase region
 {
@@ -57,6 +58,7 @@ That's ~600ms just to confirm the user is logged in.
 ### Solution
 
 **Middleware:** Use `getClaims()` for local JWT validation (~0ms):
+<!-- pattern: required middleware uses getClaims, not getUser -->
 ```ts
 // src/lib/supabase/middleware.ts
 const { data: { claims } } = await supabase.auth.getClaims();
@@ -64,6 +66,7 @@ const user = claims?.sub ? { id: claims.sub } : null;
 ```
 
 **Layout + Pages:** Use `React.cache()` so `getUser()` runs only once:
+<!-- pattern: required getCurrentUserWithProfile() signature, React.cache-wrapped -->
 ```ts
 // src/lib/auth/access.ts
 import { cache } from "react";
@@ -95,6 +98,7 @@ call returns the cached result instantly.
 ### Shared data (locations, routes, sectors)
 Wrap in `unstable_cache` with tag-based invalidation:
 
+<!-- example: substitute your own table and cache key -->
 ```ts
 import { unstable_cache } from "next/cache";
 import { createAdminClient } from "@/lib/supabase/admin";
@@ -111,6 +115,7 @@ export const getCachedLocations = unstable_cache(
 ```
 
 ### Invalidate on mutation
+<!-- example: substitute your own tag name -->
 ```ts
 // In server actions, after modifying data:
 import { revalidateTag } from "next/cache";
@@ -119,6 +124,7 @@ revalidateTag("locations");
 
 ### User-specific data (ascents, favorites)
 Always fetch fresh — can't use admin client:
+<!-- example: substitute your own table and field -->
 ```ts
 const { data: favorites } = await supabase
   .from("user_favorites").select("entity_id").eq("user_id", user.id);
@@ -133,6 +139,7 @@ const { data: favorites } = await supabase
 ## 4. Query Discipline
 
 ### Use nested selects (avoid waterfalls)
+<!-- example: substitute your own tables and join shape -->
 ```ts
 // Bad: 2 sequential queries
 const { data: routes } = await supabase.from("routes").select("id, sector_id");
@@ -145,6 +152,7 @@ const { data: routes } = await supabase
 ```
 
 ### Parallelize independent queries
+<!-- example: substitute your own tables -->
 ```ts
 const [{ data: locations }, { data: sectors }, { data: routes }] = await Promise.all([
   supabase.from("locations").select("id, name"),
@@ -154,6 +162,7 @@ const [{ data: locations }, { data: sectors }, { data: routes }] = await Promise
 ```
 
 ### Select only needed columns on list pages
+<!-- example: substitute your own table and column list -->
 ```ts
 // Bad: fetches all 15+ columns for a list view
 supabase.from("locations").select("*")
@@ -163,6 +172,7 @@ supabase.from("locations").select("id, name, rock_type, latitude, longitude")
 ```
 
 ### Avoid N+1 loops
+<!-- example: substitute your own table and field -->
 ```ts
 // Bad: 1 query per item in a loop
 for (const date of dates) {
@@ -189,6 +199,7 @@ just use `cookies()` via the Supabase client — Next.js handles the rest.
 
 ## 6. Lazy Load Heavy Libraries
 
+<!-- example: substitute your own dynamic-imported components -->
 ```ts
 // Don't import heavy libraries at the top level
 import dynamic from "next/dynamic";
@@ -208,6 +219,7 @@ Good candidates for lazy loading:
 
 Every route should have a `loading.tsx` that provides instant visual feedback:
 
+<!-- example: substitute your own route segment path -->
 ```tsx
 // src/app/(app)/home/loading.tsx
 export { default } from "../loading";  // Reuse shared skeleton

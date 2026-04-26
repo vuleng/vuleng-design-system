@@ -72,6 +72,7 @@ Use consistent spacing values throughout all apps. These are guidelines, not com
 
 ### App Shell (Internal Tools)
 
+<!-- example: app-shell layout diagram -->
 ```
 ┌──────────────────────────────────────────────┐
 │  Header (h-14, sticky, z-30)                 │
@@ -90,6 +91,7 @@ Use consistent spacing values throughout all apps. These are guidelines, not com
 
 ### Content Page (Website / Marketing)
 
+<!-- example: content-page layout diagram -->
 ```
 ┌──────────────────────────────────────────────┐
 │  Navbar                                      │
@@ -107,6 +109,7 @@ Use consistent spacing values throughout all apps. These are guidelines, not com
 
 ### Dashboard (Grid)
 
+<!-- example: substitute your own card content and column counts -->
 ```html
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
   <div class="card p-6">...</div>
@@ -121,6 +124,7 @@ Use consistent spacing values throughout all apps. These are guidelines, not com
 
 Vertical on mobile, horizontal on desktop:
 
+<!-- example: substitute your own panes -->
 ```html
 <div class="flex flex-col md:flex-row gap-4 md:gap-6">
   <div class="flex-1">Left</div>
@@ -135,6 +139,7 @@ Vertical on mobile, horizontal on desktop:
 | Mobile (`< md`) | Fixed overlay, off-screen, slides in | Visible |
 | Desktop (`md:+`) | Relative, always visible | Hidden (`md:hidden`) |
 
+<!-- example: hamburger + sidebar responsive setup -->
 ```html
 <!-- Hamburger: visible on mobile only -->
 <button class="md:hidden w-10 h-10 flex items-center justify-center rounded-lg">
@@ -147,6 +152,7 @@ Vertical on mobile, horizontal on desktop:
 
 ### Show/Hide Elements
 
+<!-- example: substitute your own labels -->
 ```html
 <!-- Hidden on mobile, visible on tablet+ -->
 <span class="hidden sm:flex">User name</span>
@@ -163,12 +169,14 @@ Vertical on mobile, horizontal on desktop:
 | Page section | `px-4` | `px-6` | `px-8` |
 | Content gap | `gap-4` | `gap-4` | `gap-6` |
 
+<!-- example: responsive padding scale -->
 ```html
 <div class="p-4 md:p-6 lg:p-8">
 ```
 
 ### Responsive Text
 
+<!-- example: substitute your own heading classes -->
 ```html
 <h1 class="text-xl md:text-2xl lg:text-3xl font-bold text-vulkan-navy dark:text-gray-100">
 ```
@@ -177,12 +185,14 @@ Vertical on mobile, horizontal on desktop:
 
 Every app needs this in `index.html` / layout:
 
+<!-- pattern: required viewport meta tag -->
 ```html
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 ```
 
 For full-screen apps (internal tools), use dynamic viewport height:
 
+<!-- example: substitute your own root selector -->
 ```css
 #app {
   height: 100vh;
@@ -194,6 +204,7 @@ For full-screen apps (internal tools), use dynamic viewport height:
 
 For PWAs or full-screen mobile apps:
 
+<!-- example: substitute your own root selector -->
 ```css
 @supports (padding-top: env(safe-area-inset-top)) {
   #app {
@@ -205,6 +216,7 @@ For PWAs or full-screen mobile apps:
 
 And in the HTML head:
 
+<!-- pattern: required viewport meta with viewport-fit=cover -->
 ```html
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 ```
@@ -222,6 +234,7 @@ All interactive elements must meet minimum touch sizes:
 
 Apply `touch-manipulation` to checkboxes and toggles to remove the 300ms tap delay:
 
+<!-- example: touch-manipulation utility -->
 ```html
 <button class="touch-manipulation">
 ```

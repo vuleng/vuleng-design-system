@@ -14,6 +14,7 @@ last-verified: 2026-04-26
 ## Next.js (App Router) Essentials
 
 ### Folder structure
+<!-- example: baseline layout — adapt per app -->
 ```
 src/
 ├── app/                    # routes (App Router)

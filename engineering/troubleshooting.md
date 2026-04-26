@@ -20,6 +20,7 @@ last-verified: 2026-04-25
 **Cause:** You're still on Tailwind v3, or you forgot to import the preset CSS.
 
 **Fix:**
+<!-- pattern: required default-theme import -->
 ```css
 /* In your app's main CSS (e.g. globals.css) */
 @import "@vuleng/design-system";
@@ -34,11 +35,13 @@ Make sure `package.json` has `"tailwindcss": "^4.0.0"` and you have **no** `tail
 **Cause:** You're importing only the preset, not a theme.
 
 **Fix:** Use the package root for default Vulkan branding:
+<!-- pattern: required default-theme import -->
 ```css
 @import "@vuleng/design-system";
 ```
 
 Or import preset + theme separately for client-themed apps:
+<!-- pattern: required client-theme override structure (preset before theme) -->
 ```css
 @import "@vuleng/design-system/preset";
 @import "./themes/your-theme.css";
@@ -59,6 +62,7 @@ Or import preset + theme separately for client-themed apps:
 **Cause:** You have `--color-brand-primary` defined as a non-color CSS variable (e.g. just the name `vulkan-orange` without a hex value), or you're missing `--color-brand-primary-rgb` for components that use the rgb-triplet form.
 
 **Fix:** A theme must define both forms:
+<!-- pattern: required hex + RGB-triplet pair for color tokens -->
 ```css
 --color-brand-primary: #FF8935;
 --color-brand-primary-rgb: 255 137 53;
@@ -71,6 +75,7 @@ Or import preset + theme separately for client-themed apps:
 **Cause:** v1.x apps used `presets: [require("@vuleng/tailwind-preset")]` in a JS config. v2.0 is CSS-first; the JS config is no longer needed.
 
 **Fix:** Delete or empty `tailwind.config.ts`. Move all token customization into your main CSS:
+<!-- example: substitute your own custom tokens -->
 ```css
 @import "@vuleng/design-system";
 
@@ -86,6 +91,7 @@ Or import preset + theme separately for client-themed apps:
 **Cause:** You're importing only `themes/vulkan` without `preset.css`.
 
 **Fix:** Use the package root entry, which loads both:
+<!-- pattern: required default-theme import -->
 ```css
 @import "@vuleng/design-system";
 ```
