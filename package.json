@@ -1,6 +1,6 @@
 {
   "name": "@vuleng/design-system",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Vulkan Engineering design system — Tailwind v4 preset, multi-theme, full-stack guides, Claude Code plugin.",
   "exports": {
     ".": "./index.css",
