@@ -3,7 +3,7 @@ file: engineering/00-overview.md
 audience: [human, ai]
 scope: engineering
 stability: stable
-last-verified: 2026-04-25
+last-verified: 2026-04-26
 ---
 
 # Engineering — Overview
@@ -17,9 +17,12 @@ last-verified: 2026-04-25
 | If you need to… | Read |
 |------------------|------|
 | Decide between Next.js, Astro+Sanity, or static | [`stack-guide.md`](stack-guide.md) |
-| Build a Next.js app (App Router) | [`nextjs.md`](nextjs.md) |
+| Orient in a Next.js app (App Router structure, server vs client, loading/error, file naming, i18n) | [`nextjs.md`](nextjs.md) |
+| Wire up auth — middleware, `getClaims`, `getCurrentUserWithProfile`, role guards | [`nextjs-auth.md`](nextjs-auth.md) |
+| Read or write data — server-component fetches, parallel queries, `unstable_cache`, server actions | [`nextjs-data.md`](nextjs-data.md) |
+| Build forms, modals, or Cmd+K search | [`nextjs-forms.md`](nextjs-forms.md) |
 | Build an Astro + Sanity site | [`astro-sanity.md`](astro-sanity.md) |
-| Wire up Supabase (DB, auth, RLS) | [`supabase.md`](supabase.md) |
+| Wire up Supabase (DB, RLS) | [`supabase.md`](supabase.md) |
 | Hit the performance bar | [`performance.md`](performance.md) |
 | Deploy to Vercel | [`deploy.md`](deploy.md) |
 | Set up testing (Vitest + RTL) | [`testing.md`](testing.md) |
